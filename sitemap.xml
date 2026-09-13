@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url><loc>https://tgpu.my/</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>1.0</priority><xhtml:link rel="alternate" hreflang="ms-MY" href="https://tgpu.my/"/><xhtml:link rel="alternate" hreflang="en" href="https://tgpu.my/en.html"/><xhtml:link rel="alternate" hreflang="ar" href="https://tgpu.my/ar.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://tgpu.my/"/></url>
   <url><loc>https://tgpu.my/en.html</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://tgpu.my/ar.html</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
@@ -13,11 +13,11 @@
   <url><loc>https://tgpu.my/learn.html</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://tgpu.my/learn-en.html</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tgpu.my/learn-ar.html</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://tgpu.my/wellness/</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
-  <url><loc>https://tgpu.my/wellness/kunyit-hitam/</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://tgpu.my/wellness/moringa/</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://tgpu.my/wellness/sacha-inchi/</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://tgpu.my/wellness/tongkat-ali/</loc><lastmod>2026-09-13</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://tgpu.my/wellness/</loc><lastmod>2026-09-14</lastmod><changefreq>weekly</changefreq><priority>0.95</priority><image:image><image:loc>https://tgpu.my/wellness/assets/tgpu-naturals-approved-collection.png</image:loc><image:title>TGPU Naturals Malaysia product collection</image:title></image:image></url>
+  <url><loc>https://tgpu.my/wellness/kunyit-hitam/</loc><lastmod>2026-09-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><image:image><image:loc>https://tgpu.my/wellness/assets/kunyit.webp</image:loc><image:title>Kunyit Hitam TGPU Naturals Malaysia</image:title></image:image></url>
+  <url><loc>https://tgpu.my/wellness/moringa/</loc><lastmod>2026-09-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><image:image><image:loc>https://tgpu.my/wellness/assets/moringa-actual.webp</image:loc><image:title>Moringa Oleifera TGPU Naturals Malaysia</image:title></image:image></url>
+  <url><loc>https://tgpu.my/wellness/sacha-inchi/</loc><lastmod>2026-09-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><image:image><image:loc>https://tgpu.my/wellness/assets/sacha-inchi.webp</image:loc><image:title>Sacha Inchi TGPU Naturals Malaysia</image:title></image:image></url>
+  <url><loc>https://tgpu.my/wellness/tongkat-ali/</loc><lastmod>2026-09-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><image:image><image:loc>https://tgpu.my/wellness/assets/tongkat-actual.webp</image:loc><image:title>Tongkat Ali TGPU Naturals Malaysia</image:title></image:image></url>
   <url><loc>https://tgpu.my/classes.html</loc><lastmod>2026-09-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tgpu.my/classes-en.html</loc><lastmod>2026-09-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://tgpu.my/classes-ar.html</loc><lastmod>2026-09-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
