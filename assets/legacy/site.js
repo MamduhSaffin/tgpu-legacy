@@ -34,7 +34,81 @@
   const isLegacyHome = ['index.html', 'en.html', 'ar.html'].includes(page);
   const hero = isLegacyHome ? document.querySelector('.hero') : null;
   const about = isLegacyHome ? document.querySelector('.about') : null;
-  const assetVersion = '20260912-final';
+  const assetVersion = '20260913-academy';
+
+  const getAcademyCopy = () => {
+    const lang = (document.documentElement.lang || 'ms').toLowerCase();
+    if (lang.startsWith('ar')) {
+      return {
+        academy: 'الأكاديمية',
+        learningHub: 'مركز التعلّم',
+        quranCta: 'TGPU Quran',
+        quranTitle: 'TGPU Quran',
+        learningHubTitle: 'TGPU Learning Hub'
+      };
+    }
+    if (lang.startsWith('en')) {
+      return {
+        academy: 'Academy',
+        learningHub: 'Learning Hub',
+        quranCta: 'Explore TGPU Quran',
+        quranTitle: 'TGPU Quran',
+        learningHubTitle: 'TGPU Learning Hub'
+      };
+    }
+    return {
+      academy: 'Academy',
+      learningHub: 'Learning Hub',
+      quranCta: 'Terokai TGPU Quran',
+      quranTitle: 'TGPU Quran',
+      learningHubTitle: 'TGPU Learning Hub'
+    };
+  };
+
+  const enhanceAcademyHome = () => {
+    if (!isLegacyHome) return;
+    const copy = getAcademyCopy();
+
+    if (nav) {
+      const links = [...nav.querySelectorAll('a')];
+      const classesLink = links.find(a => /classes(?:-en|-ar)?\.html/.test(a.getAttribute('href') || ''));
+      const learnLink = links.find(a => /learn(?:-en|-ar)?\.html/.test(a.getAttribute('href') || ''));
+      if (classesLink) {
+        classesLink.href = 'academy/';
+        classesLink.textContent = copy.academy;
+      }
+      if (learnLink) {
+        learnLink.href = 'academy/learning-hub/';
+        learnLink.textContent = copy.learningHub;
+      }
+    }
+
+    const heroAcademyCta = document.querySelector('.hero-actions a.button-outline');
+    if (heroAcademyCta) {
+      heroAcademyCta.href = 'academy/quran/';
+      heroAcademyCta.textContent = copy.quranCta;
+    }
+
+    const pillars = [...document.querySelectorAll('.pillar-card')];
+    if (pillars[0]) pillars[0].href = 'academy/quran/';
+    if (pillars[1]) pillars[1].href = 'academy/arabic/';
+    if (pillars[2]) pillars[2].href = 'academy/islamic-learning/';
+
+    const programCards = [...document.querySelectorAll('.program-card')];
+    const retargetCard = (card, href, title) => {
+      if (!card) return;
+      const imageLink = card.querySelector('a.program-image');
+      const textLink = card.querySelector('.program-copy > a');
+      const heading = card.querySelector('h3');
+      if (imageLink) imageLink.href = href;
+      if (textLink) textLink.href = href;
+      if (heading) heading.textContent = title;
+    };
+    retargetCard(programCards[0], 'academy/quran/', copy.quranTitle);
+    retargetCard(programCards[1], 'academy/learning-hub/', copy.learningHubTitle);
+  };
+
+  enhanceAcademyHome();
 
   const loadDataImage = async prefix => {
     const parts = await Promise.all(
