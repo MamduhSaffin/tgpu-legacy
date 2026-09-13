@@ -41,6 +41,7 @@
     if (lang.startsWith('ar')) {
       return {
         academy: 'الأكاديمية',
+        academyHref: 'academy/ar.html',
         learningHub: 'مركز التعلّم',
         quranCta: 'TGPU Quran',
         quranTitle: 'TGPU Quran',
@@ -50,6 +51,7 @@
     if (lang.startsWith('en')) {
       return {
         academy: 'Academy',
+        academyHref: 'academy/en.html',
         learningHub: 'Learning Hub',
         quranCta: 'Explore TGPU Quran',
         quranTitle: 'TGPU Quran',
@@ -58,6 +60,7 @@
     }
     return {
       academy: 'Academy',
+      academyHref: 'academy/',
       learningHub: 'Learning Hub',
       quranCta: 'Terokai TGPU Quran',
       quranTitle: 'TGPU Quran',
@@ -74,7 +77,7 @@
       const classesLink = links.find(a => /classes(?:-en|-ar)?\.html/.test(a.getAttribute('href') || ''));
       const learnLink = links.find(a => /learn(?:-en|-ar)?\.html/.test(a.getAttribute('href') || ''));
       if (classesLink) {
-        classesLink.href = 'academy/';
+        classesLink.href = copy.academyHref;
         classesLink.textContent = copy.academy;
       }
       if (learnLink) {
