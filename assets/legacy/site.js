@@ -5,6 +5,21 @@
     if (!isLegacyHome) return;
 
     document.title = 'TGPU Legacy | Tok Guru Pulau Ubi';
+
+    if (!document.getElementById('tgpu-website-schema')) {
+      const schema = document.createElement('script');
+      schema.id = 'tgpu-website-schema';
+      schema.type = 'application/ld+json';
+      schema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'TGPU Legacy',
+        alternateName: 'Tok Guru Pulau Ubi Legacy',
+        url: 'https://tgpu.my/',
+        inLanguage: ['ms-MY','en','ar']
+      });
+      document.head.appendChild(schema);
+    }
     document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]').forEach(link => {
       link.href = 'assets/tgpu-logo.png?v=20260913-mainbrand';
     });

@@ -20,3 +20,10 @@ html[lang="ar"]{--serif:'Noto Naskh Arabic',Georgia,serif;--sans:'Noto Naskh Ara
 .program-image{position:relative}.image-1 img,.image-2 img{position:absolute;left:0;top:0}
 @media(max-width:700px){.hero-side{background:#102e239e;border-radius:8px;padding:9px 11px;text-shadow:0 1px 2px #142b1e}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}.button:hover,.pillar-card:hover{transform:none}}
+
+
+/* Static TGPU Legacy main logo — 2026-09-13 */
+.site-header .brand,.footer-brand{display:flex;align-items:center;gap:10px}
+.tgpu-official-emblem{width:62px;height:62px;flex:0 0 62px;object-fit:contain;object-position:center;border-radius:0;background:transparent;box-shadow:none}
+.footer-brand .tgpu-official-emblem{width:68px;height:68px;flex-basis:68px}
+@media(max-width:700px){.site-header .tgpu-official-emblem{width:52px;height:52px;flex-basis:52px}.footer-brand .tgpu-official-emblem{width:58px;height:58px;flex-basis:58px}}
