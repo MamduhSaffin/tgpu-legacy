@@ -6,7 +6,7 @@
 
     document.title = 'TGPU Legacy | Tok Guru Pulau Ubi';
     document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]').forEach(link => {
-      link.href = 'assets/favicon-512.png?v=20260913-heritage';
+      link.href = 'assets/tgpu-logo.png?v=20260913-mainbrand';
     });
 
     if (!document.getElementById('tgpu-official-brand-style')) {
@@ -20,25 +20,26 @@
           gap:10px;
         }
         .tgpu-official-emblem {
-          width:54px;
-          height:54px;
-          flex:0 0 54px;
+          width:62px;
+          height:62px;
+          flex:0 0 62px;
           object-fit:contain;
-          border-radius:50%;
-          background:#faf7ef;
-          box-shadow:0 2px 8px rgba(20,61,45,.10);
+          object-position:center;
+          border-radius:0;
+          background:transparent;
+          box-shadow:none;
         }
         footer .tgpu-official-emblem {
-          width:60px;
-          height:60px;
-          flex-basis:60px;
+          width:68px;
+          height:68px;
+          flex-basis:68px;
         }
         @media (max-width:700px) {
           .site-header .brand.tgpu-official-brand { gap:7px; }
           .site-header .tgpu-official-emblem {
-            width:42px;
-            height:42px;
-            flex-basis:42px;
+            width:52px;
+            height:52px;
+            flex-basis:52px;
           }
           .site-header .brand-name { font-size:24px; }
           .site-header .brand-name small {
@@ -47,9 +48,9 @@
             margin-top:4px;
           }
           footer .tgpu-official-emblem {
-            width:52px;
-            height:52px;
-            flex-basis:52px;
+            width:58px;
+            height:58px;
+            flex-basis:58px;
           }
         }
       `;
@@ -57,13 +58,16 @@
     }
 
     const attach = brand => {
-      if (!brand || brand.querySelector('.tgpu-official-emblem')) return;
+      if (!brand) return;
+      const existing = brand.querySelector('.tgpu-official-emblem');
+      if (existing) existing.remove();
+
       const emblem = document.createElement('img');
       emblem.className = 'tgpu-official-emblem';
-      emblem.src = 'assets/favicon-512.png?v=20260913-heritage';
+      emblem.src = 'assets/tgpu-logo.png?v=20260913-mainbrand';
       emblem.alt = 'TGPU Legacy — Tok Guru Pulau Ubi';
-      emblem.width = 64;
-      emblem.height = 64;
+      emblem.width = 900;
+      emblem.height = 900;
       brand.prepend(emblem);
       brand.classList.add('tgpu-official-brand');
     };
