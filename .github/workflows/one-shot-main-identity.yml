@@ -1,0 +1,108 @@
+name: One-shot TGPU main identity fix
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix-main-identity:
+    if: github.event.head_commit.message == 'Add one-shot TGPU main identity metadata fix'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Normalize TGPU Legacy homepage identity
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          pages = {
+              'index.html': {
+                  'title': 'TGPU Legacy | Tok Guru Pulau Ubi',
+                  'description': 'TGPU Legacy ialah platform utama yang menghimpunkan warisan Tok Guru Pulau Ubi, TGPU Academy, pembelajaran, keluarga dan misi komuniti.',
+                  'keywords': 'TGPU Legacy, Tok Guru Pulau Ubi, TGPU Academy, TGPU Quran, TGPU Arabic, TGPU Islamic Learning, TGPU Learning Hub, TGPU Naturals, warisan keluarga, pendidikan Islam',
+                  'og_description': 'Memelihara legasi Tok Guru Pulau Ubi melalui warisan keluarga, pendidikan, pembelajaran dan khidmat masyarakat.',
+                  'url': 'https://tgpu.my/',
+              },
+              'en.html': {
+                  'title': 'TGPU Legacy | Tok Guru Pulau Ubi',
+                  'description': 'TGPU Legacy is the main platform preserving the legacy of Tok Guru Pulau Ubi through family heritage, TGPU Academy, learning and community development.',
+                  'keywords': 'TGPU Legacy, Tok Guru Pulau Ubi, TGPU Academy, TGPU Quran, TGPU Arabic, TGPU Islamic Learning, TGPU Learning Hub, TGPU Naturals, family heritage, Islamic education',
+                  'og_description': 'Preserving the legacy of Tok Guru Pulau Ubi through family heritage, education, learning and community service.',
+                  'url': 'https://tgpu.my/en.html',
+              },
+              'ar.html': {
+                  'title': 'TGPU Legacy | Tok Guru Pulau Ubi',
+                  'description': 'تجمع منصة TGPU Legacy إرث توك غورو بولاو أوبي، وTGPU Academy، والتعليم، والأسرة، ورسالة خدمة المجتمع للأجيال القادمة.',
+                  'keywords': 'TGPU Legacy, Tok Guru Pulau Ubi, TGPU Academy, TGPU Quran, TGPU Arabic, التعليم الإسلامي, التراث العائلي, تعليم القرآن, اللغة العربية',
+                  'og_description': 'الحفاظ على إرث توك غورو بولاو أوبي من خلال التراث العائلي والتعليم والتعلّم وخدمة المجتمع.',
+                  'url': 'https://tgpu.my/ar.html',
+              },
+          }
+
+          def replace_meta(text, attr, name, value):
+              pattern = rf'(<meta\s+{attr}="{re.escape(name)}"\s+content=")[^"]*("\s*/?>)'
+              updated, n = re.subn(pattern, lambda m: m.group(1) + value + m.group(2), text, count=1, flags=re.I)
+              if n == 0:
+                  raise RuntimeError(f'Missing meta {attr}={name}')
+              return updated
+
+          for filename, cfg in pages.items():
+              path = Path(filename)
+              text = path.read_text(encoding='utf-8')
+
+              # Move all canonical / hreflang / structured-data URLs from the old GitHub Pages host to tgpu.my.
+              text = text.replace('https://mamduhsaffin.github.io/tgpu-legacy/', 'https://tgpu.my/')
+
+              text = replace_meta(text, 'name', 'description', cfg['description'])
+              text = replace_meta(text, 'name', 'keywords', cfg['keywords'])
+              text = replace_meta(text, 'property', 'og:title', cfg['title'])
+              text = replace_meta(text, 'property', 'og:description', cfg['og_description'])
+              text = replace_meta(text, 'property', 'og:url', cfg['url'])
+              text = replace_meta(text, 'property', 'og:image', 'https://tgpu.my/assets/tgpu-logo.png')
+              text = replace_meta(text, 'property', 'og:image:width', '512')
+              text = replace_meta(text, 'property', 'og:image:height', '512')
+              text = replace_meta(text, 'property', 'og:image:alt', 'TGPU Legacy — Tok Guru Pulau Ubi')
+              text = replace_meta(text, 'name', 'twitter:image', 'https://tgpu.my/assets/tgpu-logo.png')
+              text = replace_meta(text, 'name', 'twitter:title', cfg['title'])
+              text = replace_meta(text, 'name', 'twitter:description', cfg['og_description'])
+
+              text, n = re.subn(r'<title>.*?</title>', f"<title>{cfg['title']}</title>", text, count=1, flags=re.I|re.S)
+              if n == 0:
+                  raise RuntimeError(f'Missing title in {filename}')
+
+              # TGPU Legacy is the umbrella organization; TGPU Academy carries the EducationalOrganization identity.
+              text = text.replace('"@type":"EducationalOrganization","name":"TGPU Legacy"', '"@type":"Organization","name":"TGPU Legacy"')
+
+              path.write_text(text, encoding='utf-8')
+
+          # Guardrail: the legacy class-led title must no longer appear on the three main homepages.
+          for filename in pages:
+              text = Path(filename).read_text(encoding='utf-8')
+              if 'TGPU Legacy | Kelas Al-Quran Online Malaysia' in text:
+                  raise RuntimeError(f'Old class-led title still present in {filename}')
+              if 'mamduhsaffin.github.io/tgpu-legacy' in text:
+                  raise RuntimeError(f'Old canonical host still present in {filename}')
+
+          print('TGPU Legacy main identity metadata normalized successfully.')
+          PY
+
+      - name: Commit corrected homepage metadata
+        shell: bash
+        run: |
+          git config user.name "TGPU Legacy Site Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html en.html ar.html
+          if git diff --cached --quiet; then
+            echo "No changes required."
+            exit 0
+          fi
+          git commit -m "Normalize TGPU Legacy main website identity [skip ci]"
+          git push
