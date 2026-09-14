@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">TGPU Naturals botanical mark</title>
+  <rect width="64" height="64" rx="15" fill="#064934"/>
+  <path d="M15 47c13 5 30-3 34-23" fill="none" stroke="#efd69a" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M31 43C17 44 13 34 13 25c13 0 22 5 18 18Z" fill="#efd69a"/>
+  <path d="M37 35C26 30 29 17 40 11c5 12 4 19-3 24Z" fill="#efd69a"/>
+  <path d="M41 39c-1-11 5-17 15-17-1 11-6 17-15 17Z" fill="#efd69a"/>
+</svg>
