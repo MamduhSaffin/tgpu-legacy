@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Akademi Lancar 2027</title>
+  <desc id="desc">Circular Akademi Lancar badge with 30 Juzuk 1 Juz 1 Minggu, Quran icon, R18 / 2027 and Alhamdulillah.</desc>
+  <defs>
+    <path id="topArc" d="M 120 460 A 330 330 0 0 1 780 460"/>
+    <path id="bottomArc" d="M 765 565 A 330 330 0 0 1 135 565"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9e6ff"/>
+      <stop offset="1" stop-color="#9dd2f6"/>
+    </linearGradient>
+  </defs>
+  <circle cx="450" cy="450" r="410" fill="url(#bg)" stroke="#1354ba" stroke-width="28"/>
+  <text font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800" fill="#111" letter-spacing="1">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">30Juzuk 1Juz 1Minggu</textPath>
+  </text>
+  <g transform="translate(355 165)">
+    <path d="M95 28 C63 12 30 12 10 28 V122 C38 108 64 108 95 127 Z" fill="#fffaf0" stroke="#d6a44f" stroke-width="7"/>
+    <path d="M95 28 C127 12 160 12 180 28 V122 C152 108 126 108 95 127 Z" fill="#fffaf0" stroke="#d6a44f" stroke-width="7"/>
+    <path d="M95 30 V128" stroke="#d6a44f" stroke-width="6"/>
+    <path d="M18 52 C43 43 64 44 83 52 M18 74 C43 65 64 66 83 74 M107 52 C132 43 153 44 172 52 M107 74 C132 65 153 66 172 74" fill="none" stroke="#e5c77b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M32 138 L95 108 L158 138 L146 160 L95 137 L44 160 Z" fill="#a45b27"/>
+  </g>
+  <text x="450" y="415" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800" letter-spacing="11" fill="#8a2ac4">AKADEMI</text>
+  <text x="450" y="493" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800" letter-spacing="11" fill="#8a2ac4">LANCAR</text>
+  <g fill="#fff" stroke="#111" stroke-width="5">
+    <circle cx="185" cy="555" r="31"/><circle cx="267" cy="555" r="31"/><circle cx="349" cy="555" r="31"/><circle cx="431" cy="555" r="31"/><circle cx="513" cy="555" r="31"/><circle cx="595" cy="555" r="31"/><circle cx="677" cy="555" r="31"/>
+    <path d="M759 524 A31 31 0 1 0 759 586 A24 24 0 1 1 759 524Z"/>
+  </g>
+  <text x="450" y="675" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="900" fill="#159027">R18 / 2027</text>
+  <text font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="900" fill="#111" letter-spacing="2">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">ALHAMDULILLAH</textPath>
+  </text>
+</svg>
