@@ -23,9 +23,54 @@
       .verified-standard{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;margin:1rem 0 1.4rem;padding:.85rem 1rem;border:1px solid rgba(19,62,51,.14);background:#fff;border-radius:14px;color:#40564e;font-size:.88rem}
       .verified-standard strong{color:#153d31}.verified-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .58rem;border-radius:999px;background:#edf6f2;color:#174c39;font-weight:750}.verified-pill.secondary{background:#f7f1e4;color:#6d531c}.verified-pill.open{background:#eef2f5;color:#43525d}
       .directory-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.directory-group{background:#fff;border:1px solid rgba(19,62,51,.14);border-radius:20px;padding:1.2rem;box-shadow:0 6px 18px rgba(21,56,45,.05)}.directory-group-head{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:.85rem}.directory-group-icon{font-size:1.45rem;line-height:1}.directory-group h3{margin:0 0 .25rem}.directory-group-head p{margin:0;color:#52645d;font-size:.9rem;line-height:1.5}.directory-links{display:grid;gap:.55rem}.directory-link{display:flex;justify-content:space-between;gap:.9rem;align-items:center;padding:.78rem .86rem;border-radius:12px;background:#f6f9f8;color:inherit;text-decoration:none;border:1px solid transparent}.directory-link:hover{border-color:rgba(19,62,51,.18);background:#f0f6f3}.directory-link b{display:block;font-size:.94rem}.directory-link small{display:block;color:#64746e;margin-top:.12rem;line-height:1.35}.directory-link span:last-child{color:#8b6a26;font-weight:800}.audit-note{margin:.9rem 0 0;color:#52645d;font-size:.88rem;line-height:1.55}.picks-audit{margin-top:1rem;padding:.85rem 1rem;border-radius:13px;background:#f7faf8;color:#52645d;font-size:.9rem;line-height:1.55;border:1px solid rgba(19,62,51,.1)}
-      @media(max-width:760px){.directory-groups{grid-template-columns:1fr}.verified-standard{align-items:flex-start}.directory-link{align-items:flex-start}}
+
+      /* Shared Learning Hub subpage design system */
+      .site-header{background:#0b2819;border-bottom:1px solid rgba(255,255,255,.1)}
+      .site-header .hub-nav{min-height:74px;display:flex;align-items:center;gap:18px}.site-header .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800}.site-header .brand img{width:38px;height:38px;object-fit:contain}.site-header .brand-text{display:flex;flex-direction:column;line-height:1.05}.site-header .brand-text small{font-size:.58rem;letter-spacing:.04em;color:rgba(255,255,255,.62);font-weight:600;margin-top:4px}.site-header .nav-links{margin-left:auto;display:flex;align-items:center;gap:15px}.site-header .nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:.78rem;font-weight:700}.site-header .nav-links a:hover,.site-header .nav-links a[aria-current="page"]{color:#ecd69c}
+      main.page,main.planner-page{background:#f8faf7;padding-top:1px}.page>.hero,.planner-page>.planner-hero{margin-top:2rem;margin-bottom:2rem;border-radius:30px;padding:clamp(2.2rem,5vw,4rem);background:radial-gradient(circle at 88% 12%,rgba(236,214,156,.18),transparent 28%),linear-gradient(135deg,#0b2819,#14532d);color:#fff;box-shadow:0 20px 60px rgba(18,61,38,.14)}
+      .page>.hero .kicker,.planner-kicker{color:#ecd69c!important}.page>.hero h1,.planner-hero h1{font-family:Amiri,Georgia,serif;font-size:clamp(2.7rem,5vw,4.5rem);line-height:1.02;color:#fff;margin:.45rem 0 .8rem}.page>.hero p,.planner-hero p{color:rgba(255,255,255,.82);max-width:850px}.page>.hero .button-ghost,.planner-hero .button-ghost{border-color:rgba(255,255,255,.34);color:#fff}
+      .page h2,.planner-page h2{font-family:Amiri,Georgia,serif;color:#123d26;font-size:clamp(2rem,4vw,3rem);line-height:1.08;margin-bottom:1rem}.page h3,.planner-page h3{color:#123d26}.page .grid,.planner-grid{gap:1rem}.page .card,.planner-card{border:1px solid #dfe7df!important;border-radius:22px!important;padding:1.35rem!important;box-shadow:0 8px 24px rgba(18,61,38,.055)!important;display:flex;flex-direction:column;background:#fff}.page .card:hover,.planner-card:hover{box-shadow:0 15px 32px rgba(18,61,38,.1)!important}.page .card p,.planner-card p{color:#59685f}.page .card a,.planner-card a{margin-top:auto;color:#14532d;text-decoration:none;font-weight:800}.page .tag,.planner-page .tag{background:#eaf4ed!important;color:#14532d!important;border:1px solid #d6e7dc}.page .notice,.planner-page .notice{border-left:4px solid #c6a15b!important;background:#fff8e9!important;border-radius:0 16px 16px 0!important}.page .section-space,.planner-page .section-space{margin-top:3.25rem}.page .small,.planner-page .source-note{color:#667067}.site-footer{background:#0b2819;color:rgba(255,255,255,.72);margin-top:0}.site-footer a{color:#ecd69c;text-decoration:none}.site-footer .footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:center;padding-top:28px;padding-bottom:28px}.site-footer strong{color:#fff}
+
+      .hub-share-section{padding:72px 0;background:linear-gradient(135deg,#f6f1e4,#eef5f0);border-top:1px solid #e1e8df;border-bottom:1px solid #e1e8df}.hub-share-card{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;background:#fff;border:1px solid #dfe7df;border-radius:28px;padding:clamp(1.5rem,4vw,2.5rem);box-shadow:0 16px 42px rgba(18,61,38,.08)}.hub-share-card h2{font-family:Amiri,Georgia,serif;color:#123d26;font-size:clamp(2.2rem,4vw,3.3rem);line-height:1.04;margin:.3rem 0 .7rem}.hub-share-card p{max-width:700px;color:#5d6b63;margin:0}.hub-share-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.hub-share-button{border:0;border-radius:999px;padding:12px 17px;background:#123d26;color:#fff;font:inherit;font-weight:800;cursor:pointer}.hub-share-copy{border:1px solid #c9d7ce;border-radius:999px;padding:11px 16px;background:#fff;color:#123d26;font:inherit;font-weight:800;cursor:pointer}.hub-share-feedback{display:block;margin-top:8px;color:#667067;font-size:.78rem;min-height:1.2em}
+
+      @media(max-width:900px){.site-header .nav-links{display:none;position:absolute;left:16px;right:16px;top:70px;z-index:50;background:#123d26;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.2)}.site-header .nav-links.open{display:grid}.hub-menu{display:block}.hub-share-card{grid-template-columns:1fr}.hub-share-actions{justify-content:flex-start}}
+      @media(max-width:760px){.directory-groups{grid-template-columns:1fr}.verified-standard{align-items:flex-start}.directory-link{align-items:flex-start}.page>.hero,.planner-page>.planner-hero{margin-top:1rem;border-radius:22px;padding:1.55rem}.site-footer .footer-grid{display:grid}.hub-share-section{padding:52px 0}}
     `;
     document.head.appendChild(style);
+  }
+
+  function standardizeHubSubpages() {
+    const content = qs('main.page, main.planner-page');
+    if (!content) return;
+    const header = qs('.site-header');
+    const navWrap = qs('.hub-nav', header || document);
+    const brand = qs('.brand', header || document);
+    const nav = qs('nav', header || document);
+    if (brand) {
+      brand.href = './';
+      brand.innerHTML = '<img src="../../assets/tgpu-logo.png" alt="TGPU Legacy logo"><span class="brand-text">TGPU Learning<small>Learn • Understand • Create • Verify</small></span>';
+    }
+    if (navWrap && nav) {
+      nav.classList.add('nav-links');
+      nav.id = 'hub-links';
+      nav.setAttribute('aria-label', 'Navigasi TGPU Learning');
+      nav.innerHTML = '<a href="../../">TGPU Legacy</a><a href="../">Academy</a><a href="../quran/">Quran</a><a href="../arabic/">Arabic</a><a href="../islamic-learning/">Islamic Learning</a><a href="./">Learning Hub</a>';
+      if (!qs('.hub-menu', navWrap)) {
+        const button = document.createElement('button');
+        button.className = 'hub-menu';
+        button.type = 'button';
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-controls', 'hub-links');
+        button.textContent = 'Menu';
+        navWrap.insertBefore(button, nav);
+      }
+    }
+    const footer = qs('.site-footer');
+    const footerWrap = qs('.wrap', footer || document);
+    if (footerWrap) {
+      footerWrap.classList.add('footer-grid');
+      footerWrap.innerHTML = '<div><strong>TGPU Learning Hub</strong><br><small>Resources by TGPU Academy • tgpu.my</small></div><div><a href="./">Learning Hub</a> · <a href="../">TGPU Academy</a></div>';
+    }
   }
 
   function organizeMalaysiaHub() {
@@ -54,10 +99,11 @@
         </div>
       </section>
       <section class="directory-group" aria-labelledby="group-life">
-        <div class="directory-group-head"><span class="directory-group-icon">🧭</span><div><h3 id="group-life">Kehidupan & Kerjaya Malaysia</h3><p>Perkhidmatan penting dan laluan kerjaya dengan sumber rasmi.</p></div></div>
+        <div class="directory-group-head"><span class="directory-group-icon">🧭</span><div><h3 id="group-life">Kehidupan, Kerjaya & Bisnes Malaysia</h3><p>Perkhidmatan penting, laluan kerjaya dan permulaan bisnes dengan sumber yang jelas.</p></div></div>
         <div class="directory-links">
           <a class="directory-link" href="malaysia-essentials.html"><span><b>Malaysia Essentials</b><small>Bantuan, kesihatan, PTPTN, KWSP & perkhidmatan awam</small></span><span>→</span></a>
           <a class="directory-link" href="malaysia-jobs-career.html"><span><b>Kerja & Kerjaya</b><small>MYFutureJobs, SPA9 & PERKESO</small></span><span>→</span></a>
+          <a class="directory-link" href="malaysia-business-sme-digital.html"><span><b>Bisnes, SME & Jual Online</b><small>SSM, SME Corp, MDEC, TEKUN, TikTok Shop, Shopee & eksport</small></span><span>→</span></a>
         </div>
       </section>
       <section class="directory-group" aria-labelledby="group-culture">
@@ -128,10 +174,66 @@
     if (intro) intro.innerHTML = `Pilihan khusus untuk bacaan Al-Quran dan analisis bahasa Arab. Quran.com dikendalikan oleh Quran.Foundation; Quranic Arabic Corpus bermula sebagai projek penyelidikan University of Leeds. Untuk hukum atau fatwa, gunakan <a href="fatwa-malaysia.html">rujukan rasmi Malaysia</a>.`;
   }
 
+  function addBusinessSearchCard() {
+    const grid = qs('#resource-grid');
+    if (!grid || qs('[data-keywords*="bisnes"]', grid)) return;
+    const card = document.createElement('a');
+    card.className = 'resource-card';
+    card.href = 'malaysia-business-sme-digital.html';
+    card.dataset.keywords = 'bisnes business sme pks pmks usahawan ssm tiktok shop shopee lazada mdec tekun matrade jual online';
+    card.innerHTML = '<span>Malaysia Business</span><h3>Bisnes, SME & Jual Online</h3><p>SSM, SME Corp, pembiayaan, digitalisasi, marketplace dan langkah untuk berkembang.</p>';
+    grid.appendChild(card);
+  }
+
+  function injectShareSection() {
+    const closing = qs('.closing-section');
+    if (!closing || qs('.hub-share-section')) return;
+    const section = document.createElement('section');
+    section.className = 'hub-share-section';
+    section.innerHTML = `<div class="wrap"><div class="hub-share-card"><div><span class="eyebrow dark">KONGSI ILMU</span><h2>Jumpa sesuatu yang berguna?<br>Kongsi dengan orang yang anda sayang.</h2><p>Mungkin satu pautan, satu idea atau satu sumber di Learning Hub ini boleh membantu ahli keluarga, kawan, pelajar atau seseorang yang sedang mencari arah.</p><span class="hub-share-feedback" id="hub-share-feedback" aria-live="polite"></span></div><div class="hub-share-actions"><button class="hub-share-button" id="hub-share-button" type="button">Kongsi Learning Hub</button><button class="hub-share-copy" id="hub-share-copy" type="button">Salin pautan</button></div></div></div>`;
+    closing.parentNode.insertBefore(section, closing);
+
+    const shareButton = qs('#hub-share-button');
+    const copyButton = qs('#hub-share-copy');
+    const feedback = qs('#hub-share-feedback');
+    const canonical = qs('link[rel="canonical"]')?.href || location.href.split('#')[0];
+    const shareData = { title: 'TGPU Learning Hub', text: 'Jumpa sumber pembelajaran yang berguna di TGPU Learning Hub.', url: canonical };
+
+    shareButton?.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (feedback) feedback.textContent = 'Terima kasih kerana berkongsi ilmu.';
+          return;
+        } catch (error) {
+          if (error?.name === 'AbortError') return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(canonical);
+        if (feedback) feedback.textContent = 'Pautan disalin. Anda boleh kongsikan melalui WhatsApp, Telegram atau mana-mana aplikasi.';
+      } catch (_) {
+        if (feedback) feedback.textContent = canonical;
+      }
+    });
+
+    copyButton?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(canonical);
+        if (feedback) feedback.textContent = 'Pautan Learning Hub telah disalin.';
+      } catch (_) {
+        if (feedback) feedback.textContent = canonical;
+      }
+    });
+  }
+
   injectVerifiedHubStyles();
+  standardizeHubSubpages();
   organizeMalaysiaHub();
   refineFreeLearningPicks();
   refineIslamicPicks();
+  addBusinessSearchCard();
+  injectShareSection();
   hardenExternalLinks();
 
   const menu = qs('.hub-menu');
