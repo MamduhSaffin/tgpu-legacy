@@ -3,4 +3,16 @@
 /* IEC logo hotfix: do not render the older SVG <img>. Use the real JPG asset instead. */
 .partner-logo{display:none!important}
 .partner-kicker::before{content:"";display:block;width:180px;height:180px;margin:0 0 22px;background:#fff url("../assets/iec-logo.jpg?v=20260915") center/contain no-repeat;border:1px solid #dfe7df;border-radius:22px;box-shadow:0 10px 28px rgba(18,61,38,.08)}
-@media(max-width:620px){.partner-kicker::before{width:150px;height:150px;margin-left:auto;margin-right:auto}}
+
+/* TGPU Academy × Akademi Lancar collaboration lockup */
+.collab-lockup{display:flex;align-items:center;justify-content:center;gap:20px;margin:0 auto 28px;flex-wrap:wrap}
+.collab-lockup .collab-logo{display:block;width:150px;height:150px;object-fit:contain;background:#fff;border:1px solid #dfe7df;border-radius:24px;padding:12px;box-shadow:0 10px 28px rgba(18,61,38,.08)}
+.collab-lockup .collab-x{font-size:2rem;font-weight:800;color:#8a6b2d;line-height:1}
+.collab-lockup .collab-label{width:100%;text-align:center;margin-top:-4px;color:#667067;font-size:.8rem;font-weight:700;letter-spacing:.04em}
+
+@media(max-width:620px){
+  .partner-kicker::before{width:150px;height:150px;margin-left:auto;margin-right:auto}
+  .collab-lockup{gap:12px}
+  .collab-lockup .collab-logo{width:118px;height:118px;border-radius:20px;padding:10px}
+  .collab-lockup .collab-x{font-size:1.6rem}
+}
