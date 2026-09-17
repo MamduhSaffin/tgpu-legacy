@@ -190,9 +190,67 @@
     footer.parentNode.insertBefore(section, footer);
   };
 
+  const injectSupportEntry = () => {
+    if (!isLegacyHome) return;
+    const lang = currentLanguage();
+    const copy = {
+      ms:{nav:'Sokong TGPU',eyebrow:'SOKONG • CADANG • BINA BERSAMA',title:'Bantu TGPU terus memberi manfaat.',text:'Sumbangan sukarela boleh dibuat terus kepada Surau Tok Guru Pulau Ubi melalui DuitNow QR Maybank/MAE. Anda juga boleh menghantar cadangan, pembetulan atau laporan pautan rosak supaya TGPU terus berkembang dengan baik.',support:'Sokong TGPU',suggest:'Beri cadangan'},
+      en:{nav:'Support TGPU',eyebrow:'SUPPORT • SUGGEST • BUILD TOGETHER',title:'Help TGPU keep serving the community.',text:'Voluntary contributions can be made directly to Surau Tok Guru Pulau Ubi through its DuitNow QR. You can also send suggestions, corrections or broken-link reports to help us improve.',support:'Support TGPU',suggest:'Send a suggestion'},
+      ar:{nav:'ادعم TGPU',eyebrow:'ادعم • اقترح • ابنِ معنا',title:'ساعد TGPU على مواصلة النفع.',text:'يمكن تقديم المساهمات التطوعية مباشرة إلى Surau Tok Guru Pulau Ubi عبر رمز DuitNow QR، كما نرحب بالمقترحات والتصحيحات والإبلاغ عن الروابط المعطلة.',support:'ادعم TGPU',suggest:'أرسل اقتراحاً'}
+    }[lang];
+
+    const nav = document.querySelector('#main-nav');
+    if (nav && !nav.querySelector('a[href="support/"]')) {
+      const a = document.createElement('a');
+      a.href = 'support/';
+      a.textContent = copy.nav;
+      nav.appendChild(a);
+    }
+
+    const quick = document.querySelector('footer .footer-nav div');
+    if (quick && !quick.querySelector('a[href="support/"]')) {
+      const supportLink = document.createElement('a');
+      supportLink.href = 'support/';
+      supportLink.textContent = copy.support;
+      quick.appendChild(supportLink);
+    }
+
+    if (!document.getElementById('tgpu-support-style')) {
+      const style = document.createElement('style');
+      style.id = 'tgpu-support-style';
+      style.textContent = `
+        .tgpu-support-invite{padding:70px 0;background:linear-gradient(135deg,#0b2819,#14532d);color:#fff}
+        .tgpu-support-card{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:clamp(1.4rem,4vw,2.4rem);border:1px solid rgba(255,255,255,.14);border-radius:28px;background:rgba(255,255,255,.07);box-shadow:0 18px 50px rgba(0,0,0,.12)}
+        .tgpu-support-kicker{margin:0 0 8px;color:#ecd69c;font-size:.72rem;font-weight:800;letter-spacing:.13em}
+        .tgpu-support-card h2{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.08;color:#fff}
+        .tgpu-support-card p{max-width:760px;margin:14px 0 0;color:rgba(255,255,255,.76);line-height:1.7}
+        .tgpu-support-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+        .tgpu-support-actions a{display:inline-flex;align-items:center;justify-content:center;padding:12px 17px;border-radius:999px;font-weight:800;text-decoration:none}
+        .tgpu-support-primary{background:#ecd69c;color:#173426}.tgpu-support-secondary{border:1px solid rgba(255,255,255,.34);color:#fff}
+        .tgpu-support-invite[dir='rtl'] .tgpu-support-card{text-align:right}
+        @media(max-width:780px){.tgpu-support-card{grid-template-columns:1fr}.tgpu-support-actions{justify-content:flex-start}}
+      `;
+      document.head.appendChild(style);
+    }
+
+    if (!document.getElementById('tgpu-support-invite')) {
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+      const section = document.createElement('section');
+      section.id = 'tgpu-support-invite';
+      section.className = 'tgpu-support-invite';
+      if (lang === 'ar') section.setAttribute('dir','rtl');
+      section.innerHTML = `<div class="wrap"><div class="tgpu-support-card"><div><p class="tgpu-support-kicker">${copy.eyebrow}</p><h2>${copy.title}</h2><p>${copy.text}</p></div><div class="tgpu-support-actions"><a class="tgpu-support-primary" href="support/">${copy.support} →</a><a class="tgpu-support-secondary" href="support/#suggestion">${copy.suggest} →</a></div></div></div>`;
+      const ecosystem = document.getElementById('tgpu-ecosystem');
+      if (ecosystem) ecosystem.parentNode.insertBefore(section, ecosystem);
+      else footer.parentNode.insertBefore(section, footer);
+    }
+  };
+
   const runEnhancements = () => {
     applyOfficialBrand();
     injectEcosystem();
+    injectSupportEntry();
   };
 
   const core = document.createElement('script');
