@@ -18,6 +18,11 @@
     ar:isIndex?'index-ar.html':stem+'-ar.html'
   };
 
+  // Keep generic Learning Hub / back-to-hub links in the visitor's current language.
+  if (lang !== 'ms') {
+    document.querySelectorAll('a[href="./"]').forEach(a => a.setAttribute('href', lang === 'ar' ? 'index-ar.html' : 'index-en.html'));
+  }
+
   const nav=document.querySelector('.nav-links') || document.querySelector('.hub-nav nav') || document.querySelector('header nav');
   if(nav){
     [...nav.querySelectorAll('a')].forEach(a=>{
