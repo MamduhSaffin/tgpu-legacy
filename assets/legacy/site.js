@@ -107,39 +107,39 @@
       ms: {
         eyebrow: 'EKOSISTEM TGPU',
         title: 'Satu perjalanan, beberapa inisiatif yang saling berkait.',
-        intro: 'TGPU menghimpunkan warisan keluarga, pendidikan, kesejahteraan dan inisiatif perniagaan rentas sempadan. Setiap platform mempunyai fungsi tersendiri, tetapi semuanya lahir daripada perjalanan TGPU yang sama.',
+        intro: 'TGPU menghimpunkan warisan keluarga, pendidikan, kesejahteraan dan inisiatif perdagangan serta perniagaan rentas sempadan. Setiap platform mempunyai fungsi tersendiri, tetapi semuanya lahir daripada perjalanan TGPU yang sama.',
         visit: 'Terokai',
         cards: [
           ['TGPU Legacy', 'Warisan Tok Guru Pulau Ubi, keluarga dan khidmat masyarakat.', 'index.html', 'WARISAN'],
           ['TGPU Academy', 'Al-Quran, bahasa Arab, pendidikan Islam dan sumber pembelajaran.', 'academy/', 'PENDIDIKAN'],
           ['TGPU Naturals', 'Inisiatif produk kesejahteraan semula jadi keluarga TGPU.', 'wellness/?lang=ms', 'KESEJAHTERAAN'],
-          ['TGPU Gulf Advisory', 'Khidmat nasihat Malaysia ↔ Saudi/GCC untuk kemasukan pasaran, sourcing dan pembangunan perniagaan.', 'https://tgpugulf.com/', 'PERNIAGAAN'],
+          ['TGPU Gulf Advisory & Trade', 'Malaysia ↔ Saudi/GCC untuk kemasukan pasaran, sourcing, pemadanan pembeli-pembekal, fasilitasi perdagangan dan pembangunan perniagaan.', 'https://tgpugulf.com/', 'PERNIAGAAN'],
           ['GCC Market Entry', 'Panduan dan sumber praktikal untuk syarikat yang meneroka pasaran Saudi dan GCC.', 'https://gccmarketentry.me/', 'SUMBER']
         ]
       },
       en: {
         eyebrow: 'THE TGPU ECOSYSTEM',
         title: 'One journey, several connected initiatives.',
-        intro: 'TGPU brings together family legacy, education, wellness and cross-border business initiatives. Each platform has its own purpose while remaining connected through the wider TGPU journey.',
+        intro: 'TGPU brings together family legacy, education, wellness and cross-border trade and business initiatives. Each platform has its own purpose while remaining connected through the wider TGPU journey.',
         visit: 'Explore',
         cards: [
           ['TGPU Legacy', 'The Tok Guru Pulau Ubi family legacy, community and wider TGPU story.', 'en.html', 'LEGACY'],
           ['TGPU Academy', 'Quran, Arabic, Islamic learning and educational resources.', 'academy/en.html', 'EDUCATION'],
           ['TGPU Naturals', 'The TGPU family’s natural-wellness product initiative.', 'wellness/?lang=en', 'WELLNESS'],
-          ['TGPU Gulf Advisory', 'Malaysia ↔ Saudi/GCC market-entry, sourcing and business-development advisory.', 'https://tgpugulf.com/', 'BUSINESS'],
+          ['TGPU Gulf Advisory & Trade', 'Malaysia ↔ Saudi/GCC market entry, buyer-supplier sourcing, trade facilitation and cross-border business development.', 'https://tgpugulf.com/', 'BUSINESS'],
           ['GCC Market Entry', 'Practical guides and resources for companies exploring Saudi and GCC markets.', 'https://gccmarketentry.me/', 'RESOURCE']
         ]
       },
       ar: {
         eyebrow: 'منظومة TGPU',
         title: 'مسيرة واحدة، ومبادرات مترابطة.',
-        intro: 'تجمع TGPU بين إرث العائلة والتعليم والعافية ومبادرات الأعمال العابرة للحدود. لكل منصة دورها الخاص، مع بقائها جزءاً من المسيرة الأوسع لـ TGPU.',
+        intro: 'تجمع TGPU بين إرث العائلة والتعليم والعافية ومبادرات التجارة والأعمال العابرة للحدود. لكل منصة دورها الخاص، مع بقائها جزءاً من المسيرة الأوسع لـ TGPU.',
         visit: 'استكشف',
         cards: [
           ['TGPU Legacy', 'إرث Tok Guru Pulau Ubi والعائلة وخدمة المجتمع.', 'ar.html', 'الإرث'],
           ['TGPU Academy', 'القرآن واللغة العربية والتربية الإسلامية والموارد التعليمية.', 'academy/ar.html', 'التعليم'],
           ['TGPU Naturals', 'مبادرة عائلية لمنتجات العافية الطبيعية.', 'wellness/?lang=ar', 'العافية'],
-          ['TGPU Gulf Advisory', 'استشارات ماليزيا ↔ السعودية والخليج لدخول السوق والبحث عن الموردين وتطوير الأعمال.', 'https://tgpugulf.com/ar/', 'الأعمال'],
+          ['TGPU Gulf Advisory & Trade', 'استشارات وتسهيل التجارة بين ماليزيا والسعودية والخليج، بما يشمل دخول السوق وربط المشترين بالموردين وتطوير الأعمال.', 'https://tgpugulf.com/ar/', 'الأعمال'],
           ['GCC Market Entry', 'أدلة وموارد عملية للشركات التي تستكشف السوق السعودي وأسواق الخليج.', 'https://gccmarketentry.me/', 'المعرفة']
         ]
       }
