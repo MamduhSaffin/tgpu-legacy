@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+.lang-switch{
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  padding:.22rem;
+  border:1px solid rgba(21,61,49,.16);
+  border-radius:999px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 4px 14px rgba(17,48,38,.06);
+  white-space:nowrap
+}
+.lang-switch a{
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  min-height:34px;
+  padding:.38rem .65rem!important;
+  border-radius:999px!important;
+  text-decoration:none!important;
+  font-size:.76rem!important;
+  font-weight:800!important;
+  letter-spacing:.02em;
+  color:#244637!important;
+  background:transparent!important;
+  border:0!important
+}
+.lang-switch a[aria-current="page"]{
+  background:#123d26!important;
+  color:#fff!important
+}
+.lang-switch a[lang="ar"]{
+  font-family:"Cairo",sans-serif!important;
+  font-size:.82rem!important;
+  letter-spacing:0!important
+}
+
+html[dir="rtl"] body{
+  direction:rtl;
+  text-align:right;
+  font-family:"Noto Naskh Arabic","Amiri",serif;
+  font-size:1.04rem;
+  line-height:1.8
+}
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6,
+html[dir="rtl"] .eyebrow,
+html[dir="rtl"] .button,
+html[dir="rtl"] button,
+html[dir="rtl"] .tag,
+html[dir="rtl"] .badge,
+html[dir="rtl"] .pick-category,
+html[dir="rtl"] .track-label,
+html[dir="rtl"] .mission-tag,
+html[dir="rtl"] .card-badge,
+html[dir="rtl"] nav,
+html[dir="rtl"] .brand-text,
+html[dir="rtl"] input,
+html[dir="rtl"] label{
+  font-family:"Cairo","Noto Naskh Arabic",sans-serif
+}
+html[dir="rtl"] h1{line-height:1.35}
+html[dir="rtl"] h2{line-height:1.45}
+html[dir="rtl"] h3{line-height:1.5}
+html[dir="rtl"] p,
+html[dir="rtl"] li,
+html[dir="rtl"] small,
+html[dir="rtl"] .muted,
+html[dir="rtl"] .note{
+  line-height:1.9
+}
+html[dir="rtl"] .nav,
+html[dir="rtl"] .nav-links,
+html[dir="rtl"] .hub-nav,
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .actions,
+html[dir="rtl"] .verified-standard,
+html[dir="rtl"] .hero-values,
+html[dir="rtl"] .hero-proof,
+html[dir="rtl"] .track-filter,
+html[dir="rtl"] .pick-badges,
+html[dir="rtl"] .pill-row{
+  direction:rtl
+}
+html[dir="rtl"] .nav{justify-content:space-between}
+html[dir="rtl"] .nav-links{margin-left:0;margin-right:auto}
+html[dir="rtl"] .brand,
+html[dir="rtl"] .directory-link,
+html[dir="rtl"] .resource-card,
+html[dir="rtl"] .pick-card,
+html[dir="rtl"] .track-card,
+html[dir="rtl"] .mission-card,
+html[dir="rtl"] .card,
+html[dir="rtl"] .panel,
+html[dir="rtl"] details{
+  text-align:right
+}
+html[dir="rtl"] .directory-link{flex-direction:row}
+html[dir="rtl"] .directory-link>span:last-child{transform:scaleX(-1)}
+html[dir="rtl"] .source-no,
+html[dir="rtl"] .mission-number{font-family:"Cairo",sans-serif}
+html[dir="rtl"] input[type="search"],
+html[dir="rtl"] input[type="text"],
+html[dir="rtl"] textarea{
+  direction:rtl;
+  text-align:right
+}
+html[dir="rtl"] .big-ayah,
+html[dir="rtl"] .arabic-display,
+html[dir="rtl"] [lang="ar"]{
+  font-family:"Noto Naskh Arabic","Amiri",serif
+}
+html[dir="rtl"] .big-ayah,
+html[dir="rtl"] .arabic-display{
+  line-height:1.7
+}
+html[dir="rtl"] .crumbs{direction:rtl;text-align:right}
+html[dir="rtl"] .footer-grid{direction:rtl;text-align:right}
+html[dir="rtl"] .center,
+html[dir="rtl"] .section-intro.center,
+html[dir="rtl"] .section-head.center{text-align:center}
+html[dir="rtl"] .sr-only{direction:rtl}
+html[dir="rtl"] .inline-arabic,
+html[dir="rtl"] code,
+html[dir="rtl"] pre{unicode-bidi:isolate}
+html[dir="rtl"] a[href^="http"],
+html[dir="rtl"] a[href^="mailto:"],
+html[dir="rtl"] .latin{
+  unicode-bidi:isolate
+}
+
+@media(max-width:900px){
+  .lang-switch{order:3}
+}
+@media(max-width:760px){
+  .lang-switch{
+    width:100%;
+    justify-content:center;
+    margin:.35rem 0 .1rem
+  }
+  .lang-switch a{flex:1}
+  html[dir="rtl"] .nav-links{margin-right:0}
+}
