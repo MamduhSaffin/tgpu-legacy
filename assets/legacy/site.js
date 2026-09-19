@@ -22,7 +22,12 @@
         name: 'TGPU Legacy',
         alternateName: 'Tok Guru Pulau Ubi Legacy',
         url: 'https://tgpu.my/',
-        inLanguage: ['ms-MY','en','ar']
+        inLanguage: ['ms-MY','en','ar'],
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://tgpu.my/search/?q={search_term_string}',
+          'query-input': 'required name=search_term_string'
+        }
       });
       document.head.appendChild(schema);
     }
@@ -247,8 +252,47 @@
     }
   };
 
+  const injectSearchEntry = () => {
+    if (!isLegacyHome) return;
+    const lang = currentLanguage();
+    const copy = {
+      ms:{nav:'Cari',label:'Cari di seluruh TGPU'},
+      en:{nav:'Search',label:'Search across TGPU'},
+      ar:{nav:'بحث',label:'البحث في TGPU'}
+    }[lang];
+
+    if (!document.getElementById('tgpu-search-entry-style')) {
+      const style = document.createElement('style');
+      style.id = 'tgpu-search-entry-style';
+      style.textContent = `
+        .main-nav .tgpu-search-link{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid rgba(236,214,156,.45);border-radius:999px;color:#ecd69c!important}
+        .main-nav .tgpu-search-link:hover{background:#ecd69c;color:#173426!important}
+      `;
+      document.head.appendChild(style);
+    }
+
+    const nav = document.querySelector('#main-nav');
+    if (nav && !nav.querySelector('a[href="search/"]')) {
+      const a = document.createElement('a');
+      a.href = 'search/';
+      a.className = 'tgpu-search-link';
+      a.setAttribute('aria-label', copy.label);
+      a.textContent = `⌕ ${copy.nav}`;
+      nav.insertBefore(a, nav.firstChild);
+    }
+
+    const quick = document.querySelector('footer .footer-nav div');
+    if (quick && !quick.querySelector('a[href="search/"]')) {
+      const a = document.createElement('a');
+      a.href = 'search/';
+      a.textContent = copy.nav;
+      quick.appendChild(a);
+    }
+  };
+
   const runEnhancements = () => {
     applyOfficialBrand();
+    injectSearchEntry();
     injectEcosystem();
     injectSupportEntry();
   };
