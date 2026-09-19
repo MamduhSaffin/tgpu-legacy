@@ -9,91 +9,48 @@
   <link rel="canonical" href="https://tgpu.my/search/">
   <link rel="icon" href="../assets/tgpu-logo.png">
   <meta name="theme-color" content="#0b2819">
-  <style>
-    :root{--green:#0b2819;--green2:#14532d;--cream:#f7f3e9;--gold:#c6a15b;--gold2:#ecd69c;--ink:#183127;--muted:#657069;--line:#dfe7df;--white:#fff}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Poppins,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#f8faf7}a{color:inherit}.wrap{width:min(1120px,calc(100% - 32px));margin:auto}
-    .site-header{background:var(--green);color:#fff;border-bottom:1px solid rgba(255,255,255,.1)}.header-inner{min-height:76px;display:flex;align-items:center;gap:18px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800}.brand img{width:44px;height:44px;object-fit:contain}.brand span{display:flex;flex-direction:column;line-height:1.06}.brand small{font-size:.62rem;color:rgba(255,255,255,.65);letter-spacing:.05em;margin-top:4px}.header-links{margin-left:auto;display:flex;gap:14px;align-items:center}.header-links a{color:rgba(255,255,255,.84);text-decoration:none;font-weight:700;font-size:.82rem}.header-links a:hover{color:var(--gold2)}
-    .hero{background:radial-gradient(circle at 85% 10%,rgba(236,214,156,.18),transparent 30%),linear-gradient(135deg,#0b2819,#14532d);color:#fff;padding:clamp(48px,8vw,92px) 0 66px}.eyebrow{margin:0 0 8px;color:var(--gold2);font-size:.76rem;font-weight:800;letter-spacing:.14em}.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.6rem,7vw,5rem);line-height:.98;margin:.25rem 0 1rem}.hero p{max-width:760px;color:rgba(255,255,255,.78);line-height:1.7;margin:0}.search-shell{margin-top:28px;max-width:900px}.search-form{display:flex;background:#fff;border-radius:18px;padding:7px;box-shadow:0 18px 55px rgba(0,0,0,.2)}.search-form input{flex:1;min-width:0;border:0;outline:0;padding:15px 16px;font:inherit;font-size:1rem;color:#173426;background:transparent}.search-form button{border:0;border-radius:13px;background:var(--gold2);color:#173426;font:inherit;font-weight:800;padding:0 22px;cursor:pointer}.search-form button:hover{filter:brightness(.97)}.hint{font-size:.76rem;margin-top:10px!important;color:rgba(255,255,255,.62)!important}
-    main{padding:38px 0 80px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 26px}.filter{border:1px solid var(--line);background:#fff;color:#365247;border-radius:999px;padding:8px 12px;font:inherit;font-size:.78rem;font-weight:700;cursor:pointer}.filter.active{background:var(--green);border-color:var(--green);color:#fff}.status{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:18px}.status h2{font-family:Georgia,"Times New Roman",serif;color:#123d26;font-size:clamp(1.8rem,4vw,2.7rem);margin:0}.status p{margin:6px 0 0;color:var(--muted)}
-    .results{display:grid;gap:13px}.result{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:19px;text-decoration:none;box-shadow:0 7px 22px rgba(18,61,38,.04);transition:.18s ease}.result:hover{transform:translateY(-2px);border-color:rgba(198,161,91,.7);box-shadow:0 13px 30px rgba(18,61,38,.08)}.result-category{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8a6b2d}.result h3{margin:5px 0 5px;font-family:Georgia,"Times New Roman",serif;color:#123d26;font-size:1.35rem}.result p{margin:0;color:#647169;font-size:.88rem;line-height:1.55}.arrow{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#edf6f2;color:#14532d;font-weight:900}.empty{padding:28px;background:#fff;border:1px dashed #cbd8d0;border-radius:20px;color:#5f6d65}.empty strong{color:#123d26}.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.suggestions button{border:1px solid #d9e4dd;background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;color:#284a3b;font:inherit;font-size:.78rem}.quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}.quick{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.quick b{display:block;color:#123d26}.quick span{display:block;color:#6b756e;font-size:.78rem;margin-top:5px;line-height:1.45}.quick:hover{border-color:#c6a15b}
-    footer{background:var(--green);color:rgba(255,255,255,.7);padding:28px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-inner a{color:var(--gold2);text-decoration:none}
-    @media(max-width:780px){.header-links a:not(.home-link){display:none}.search-form{border-radius:15px}.search-form button{padding:0 15px}.result{grid-template-columns:1fr}.arrow{display:none}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.status{display:block}.footer-inner{display:grid}}
-    @media(max-width:480px){.wrap{width:min(100% - 22px,1120px)}.hero{padding-top:40px}.quick-grid{grid-template-columns:1fr}.search-form input{padding-left:10px}.search-form button{font-size:.84rem}}
-  </style>
+  <link rel="stylesheet" href="search.css?v=20260920">
 </head>
 <body>
-<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../"><img src="../assets/tgpu-logo.png" alt="TGPU Legacy logo"><span>TGPU Search<small>TGPU Legacy · Academy · Learning Hub</small></span></a><nav class="header-links" aria-label="Search navigation"><a class="home-link" href="../">TGPU Legacy</a><a href="../academy/">Academy</a><a href="../academy/learning-hub/">Learning Hub</a></nav></div></header>
-<section class="hero"><div class="wrap"><p class="eyebrow">CARI • TEMUI • BELAJAR</p><h1>Cari di seluruh TGPU</h1><p>Cari topik, kelas, sumber atau panduan merentas TGPU Legacy, TGPU Academy, Quran, Islamic Learning dan Learning Hub.</p><div class="search-shell"><form class="search-form" id="search-form" role="search"><label for="site-search" hidden>Cari di TGPU</label><input id="site-search" name="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Contoh: wuduk, qiraat, masjid, biasiswa, SME…"><button type="submit">Cari</button></form><p class="hint">Tip: anda boleh cari dalam Bahasa Melayu, English atau العربية.</p></div></div></section>
-<main><div class="wrap"><div class="filters" id="filters" aria-label="Tapis hasil carian"></div><div class="status"><div><h2 id="result-title">Mula mencari</h2><p id="result-status">Taip satu perkataan atau topik untuk mencari kandungan TGPU.</p></div></div><div class="results" id="results"></div><section id="start-here"><div class="quick-grid"><a class="quick" href="../academy/quran/"><b>TGPU Quran</b><span>Bacaan, Qiraat, kisah, Ayat al-Ahkam dan Huffaz.</span></a><a class="quick" href="../academy/islamic-learning/"><b>Islamic Learning</b><span>Rukun, wuduk, solat, puasa, zakat dan adab.</span></a><a class="quick" href="../academy/learning-hub/"><b>Learning Hub</b><span>Sumber Malaysia, pendidikan, kerjaya, budaya dan Islam.</span></a><a class="quick" href="../academy/learning-hub/explore-masjid-malaysia.html"><b>Explore Masjid</b><span>Cari masjid dan sumber rasmi berkaitan.</span></a></div></section></div></main>
-<footer><div class="wrap footer-inner"><span>© TGPU Legacy · Ilmu untuk Dunia, Amal untuk Akhirat.</span><span><a href="../support/">Support TGPU</a> · <a href="../academy/collaboration.html">Collaboration</a></span></div></footer>
-<script>
-(() => {
-  const DATA = [
-    ['TGPU Legacy','Warisan Tok Guru Pulau Ubi, keluarga, pendidikan dan misi komuniti.','../','Legacy','legacy tok guru pulau ubi keluarga family sejarah history komuniti community tgpu'],
-    ['TGPU Academy','Payung pendidikan untuk Quran, Arabic, Islamic Learning dan Learning Hub.','../academy/','Academy','academy akademi pendidikan education belajar learning kelas class quran arabic islamic'],
-    ['TGPU Quran','Bacaan, Tajwid, Qiraat, kisah, makanan dalam Al-Quran, Ayat al-Ahkam, bahasa Quran dan Huffaz.','../academy/quran/','Quran','quran al-quran tajwid iqra tilawah bacaan reading hafazan huffaz hafiz qiraat riwayat hafs warsh qalun nabi kisah food makanan ayat ahkam hukum bahasa arabic corpus tadabbur'],
-    ['Qiraat & Riwayat','Pengenalan Qiraat, riwayat dan sumber pembelajaran berautoriti.','../academy/quran/#qiraat','Quran','qiraat qiraah riwayah riwayat hafs warsh qalun bacaan sanad tajwid'],
-    ['Kisah & Nabi dalam Al-Quran','Kisah Nabi Yusuf, Musa, Ibrahim, Maryam, Isa dan pelajaran daripada Al-Quran.','../academy/quran/#stories','Quran','nabi prophet stories kisah yusuf musa ibrahim maryam isa ayyub quran'],
-    ['Makanan & Minuman dalam Al-Quran','Rujukan kepada makanan dan minuman yang disebut dalam Al-Quran tanpa dakwaan kesihatan berlebihan.','../academy/quran/#foods','Quran','makanan food minuman drink quran madu honey kurma dates susu milk zaitun olive'],
-    ['Ayat al-Ahkam','Ayat berkaitan ibadah, keluarga, muamalat, makanan, faraid dan keadilan.','../academy/quran/#ahkam','Quran','ayat ahkam hukum fiqh ibadah keluarga faraid muamalat halal haram justice hukum-hakam'],
-    ['Ruang Huffaz','Idea hafazan dan murajaah untuk menjaga hafalan Al-Quran.','../academy/quran/#huffaz','Quran','huffaz hafiz hafazan memorisation memorization murajaah revision 30 minit'],
-    ['TGPU Arabic','Pembelajaran bahasa Arab secara berperingkat untuk bukan penutur asli.','../academy/arabic/','Academy','arabic bahasa arab arabic learning nahu sarf vocabulary kosa kata grammar beginner'],
-    ['TGPU Islamic Learning','Asas Islam: Rukun Iman, Rukun Islam, wuduk, solat, puasa, zakat dan adab.','../academy/islamic-learning/','Islamic Learning','islam muslim asas basic rukun iman rukun islam wuduk wudhu solat prayer salah puasa fasting ramadan zakat adab fiqh'],
-    ['Wuduk','Panduan asas bersuci dan rukun wuduk dalam konteks mazhab al-Syafi‘i di Malaysia.','../academy/islamic-learning/#wuduk','Islamic Learning','wuduk wudhu ablution taharah bersuci syafie shafii niat muka tangan siku kepala kaki'],
-    ['Cara Solat','Struktur asas solat fardu, rukun dan rujukan pembelajaran Malaysia.','../academy/islamic-learning/#solat','Islamic Learning','solat salah prayer cara solat beginner takbir fatihah rukuk sujud tasyahhud salam subuh zohor asar maghrib isyak'],
-    ['Puasa Ramadan','Asas puasa, niat, waktu dan situasi yang memerlukan rujukan hukum lanjut.','../academy/islamic-learning/#puasa','Islamic Learning','puasa fasting ramadan niat imsak iftar qada fidyah sakit musafir'],
-    ['Zakat','Pengenalan zakat fitrah dan zakat harta serta kepentingan rujukan institusi negeri.','../academy/islamic-learning/#zakat','Islamic Learning','zakat fitrah harta nisab haul kadar negeri malaysia'],
-    ['TGPU Learning Hub','Pusat sumber percuma untuk belajar, kehidupan, kerjaya, budaya, Islam dan Malaysia.','../academy/learning-hub/','Learning Hub','learning hub belajar free percuma malaysia education sumber resources verified'],
-    ['Rujukan Fatwa Malaysia','JAKIM e-SMAF dan pautan jabatan mufti negeri untuk semakan fatwa.','../academy/learning-hub/fatwa-malaysia.html','Learning Hub','fatwa jakim mufti e-smaf hukum agama malaysia perlis kedah penang perak selangor negeri sembilan melaka johor pahang kelantan terengganu sabah sarawak wilayah'],
-    ['Sekolah & Biasiswa','Perancangan sekolah, pengajian dan rujukan biasiswa untuk pelajar.','../academy/learning-hub/school-scholarship-planner.html','Learning Hub','school sekolah scholarship biasiswa university universiti student pelajar education planner tajaan'],
-    ['Perpustakaan Pelajar & Ilmu','u-Pustaka, OpenStax, OpenLearn, Project Gutenberg dan sumber ilmu terbuka.','../academy/learning-hub/student-library-knowledge.html','Learning Hub','library perpustakaan books buku upustaka openstax openlearn gutenberg student knowledge ilmu'],
-    ['Bahasa Malaysia Bersama','Sumber pertukaran dan pembelajaran Bahasa Melayu, Mandarin dan Tamil.','../academy/learning-hub/malaysia-language-exchange.html','Learning Hub','language bahasa melayu malay mandarin chinese tamil exchange prpm dictionary kamus'],
-    ['Kerja & Kerjaya Malaysia','Portal kerjaya dan pekerjaan seperti MYFutureJobs, SPA9 dan PERKESO.','../academy/learning-hub/malaysia-jobs-career.html','Learning Hub','job jobs kerja career kerjaya vacancy jawatan myfuturejobs spa9 perkeso malaysia'],
-    ['Bisnes, SME & Jual Online','SSM, SME Corp, MDEC, TEKUN, TikTok Shop, Shopee, Lazada, MATRADE dan asas bisnes.','../academy/learning-hub/malaysia-business-sme-digital.html','Learning Hub','business bisnes sme pks pmks ssm usahawan entrepreneur mdec tekun matrade tiktok shop shopee lazada ecommerce e-commerce jual online export eksport'],
-    ['Malaysia Essentials','Bantuan, kesihatan, PTPTN, KWSP dan perkhidmatan penting Malaysia.','../academy/learning-hub/malaysia-essentials.html','Learning Hub','malaysia essentials bantuan aid kesihatan health ptptn kwsp epf mysejahtera government kerajaan'],
-    ['Explore Masjid Malaysia','Cari masjid melalui SISMIM, e-Solat dan sumber rasmi serta panduan adab lawatan.','../academy/learning-hub/explore-masjid-malaysia.html','Learning Hub','masjid mosque surau sismim e-solat jakim prayer solat malaysia travel visit'],
-    ['Live Haramain & Gulf','Saluran rasmi Haramain, Nusuk, SPA, WAM dan maklumat Saudi/Gulf.','../academy/learning-hub/live-haramain-gulf-info.html','Learning Hub','haramain makkah mecca madinah medina live saudi gulf nusuk spa wam hajj umrah'],
-    ['Warisan Malaysia Mengikut Negeri','Makanan, pakaian, sukan dan identiti negeri-negeri Malaysia.','../academy/learning-hub/malaysia-heritage-by-state.html','Learning Hub','heritage warisan malaysia negeri state budaya culture traditional food pakaian sukan'],
-    ['Cerita Malaysia Zaman Dulu','P. Ramlee, arkib, filem dan memori budaya Malaysia.','../academy/learning-hub/malaysia-classic-stories.html','Learning Hub','cerita malaysia classic stories p ramlee arkib archive filem film nostalgia'],
-    ['Cuti-Cuti Malaysia','Destinasi dan rujukan pelancongan mengikut negeri.','../academy/learning-hub/malaysia-holiday-by-state.html','Learning Hub','cuti holiday travel tourism malaysia negeri destination jalan jalan'],
-    ['Kalendar Cuti & Sekolah Malaysia','Rujukan cuti awam dan cuti sekolah Malaysia.','../academy/learning-hub/malaysia-holidays-school-calendar.html','Learning Hub','calendar kalendar cuti sekolah school holiday public holiday malaysia raya ramadan'],
-    ['Kafe & Tempat Popular Malaysia','Panduan kawasan, kafe dan tempat popular untuk diteroka.','../academy/learning-hub/malaysia-cafes-popular-places.html','Learning Hub','cafe cafes kafe popular places tempat viral malaysia travel makan'],
-    ['Makanan, Sumber & Herba Malaysia','Sumber tempatan, sawit, makanan dan herba dengan pendekatan berhati-hati.','../academy/learning-hub/malaysia-food-resources-herbs.html','Learning Hub','food makanan herbs herba palm oil sawit resources malaysia traditional'],
-    ['Ulama & Sasterawan Malaysia','Tokoh ilmu, agama, bahasa dan sastera Malaysia.','../academy/learning-hub/ulama-sasterawan-malaysia.html','Learning Hub','ulama scholar sasterawan writer malaysia tokoh literature bahasa agama'],
-    ['Nasyid Interaktif','Sumber nasyid dan aktiviti bahasa serta nilai.','../academy/learning-hub/interactive-nasyid.html','Learning Hub','nasyid nasheed music islamic song lagu interactive bahasa values'],
-    ['Islamic Education Class (IEC)','Kolaborasi pendidikan Islam TGPU Academy dengan Islamic Education Class.','../academy/learning-hub/interactive-islamic-education-europe.html','Collaboration','iec islamic education class europe eropah children adult tadabbur collaboration kelas islam'],
-    ['Akademi Lancar','Kolaborasi komuniti pembelajaran Al-Quran secara online, percuma dan berperingkat.','../academy/#akademi-lancar','Collaboration','akademi lancar quran tajwid iqra zoom online free percuma 30 juzuk 1 juz 1 minggu kak sal salwana'],
-    ['Feature Your Class with TGPU','Borang kolaborasi untuk kelas Quran, Tajwid, Iqra, Hafazan, Arabic atau pendidikan Islam.','../academy/collaboration.html','Collaboration','collaboration kolaborasi feature class kelas quran tajwid iqra hafazan arabic islamic teacher academy'],
-    ['Kelas TGPU','Maklumat kelas, yuran dan pendaftaran TGPU.','../classes.html','Classes','kelas class tuition yuran fee pricing registration daftar quran tajwid online'],
-    ['Pusat Ilmu TGPU','Bahan pembelajaran dan panduan TGPU Legacy.','../learn.html','Legacy','learn belajar pusat ilmu resources arabic parents legacy'],
-    ['Support TGPU','Sokongan kepada misi TGPU dan Surau Tok Guru Pulau Ubi serta borang cadangan/pembetulan.','../support/','Support','support sokong donation sumbangan duitnow qr maybank surau tok guru pulau ubi suggestion cadangan correction pembetulan'],
-    ['TGPU Naturals','Inisiatif produk kesejahteraan semula jadi keluarga TGPU.','../wellness/','Wellness','tgpu naturals wellness kesihatan natural family product produk'],
-    ['Kunyit Hitam · TGPU Naturals','Halaman produk Kunyit Hitam TGPU Naturals.','../wellness/kunyit-hitam/','Wellness','kunyit hitam black turmeric tgpu naturals'],
-    ['Moringa · TGPU Naturals','Halaman produk Moringa TGPU Naturals.','../wellness/moringa/','Wellness','moringa kelor tgpu naturals'],
-    ['Sacha Inchi · TGPU Naturals','Halaman produk Sacha Inchi TGPU Naturals.','../wellness/sacha-inchi/','Wellness','sacha inchi tgpu naturals omega'],
-    ['Tongkat Ali · TGPU Naturals','Halaman produk Tongkat Ali TGPU Naturals.','../wellness/tongkat-ali/','Wellness','tongkat ali eurycoma longifolia tgpu naturals'],
-    ['TGPU Gulf Advisory & Trade','Malaysia ↔ Saudi/GCC market entry, sourcing, trade facilitation dan business development.','../gulf/','Gulf','gulf gcc saudi uae middle east malaysia market entry trade advisory sourcing business tgpu gulf'],
-    ['Sarong Music Run 2026 · Living Heritage','Refleksi tentang acara Sarong Music Run 2026 dan warisan hidup Malaysia.','../academy/learning-hub/sarong-music-run-2026-living-heritage.html','Learning Hub','sarong music run 2026 heritage warisan malaysia budaya family event']
-  ].map(([title,description,url,category,keywords]) => ({title,description,url,category,keywords}));
-
-  const ui = {
-    ms:{search:'Cari',start:'Mula mencari',prompt:'Taip satu perkataan atau topik untuk mencari kandungan TGPU.',found:n=>`${n} hasil ditemui`,none:'Tiada hasil yang tepat ditemui.',try:'Cuba perkataan lain seperti',all:'Semua'},
-    en:{search:'Search',start:'Start searching',prompt:'Type a word or topic to search TGPU.',found:n=>`${n} result${n===1?'':'s'} found`,none:'No exact result was found.',try:'Try another term such as',all:'All'},
-    ar:{search:'بحث',start:'ابدأ البحث',prompt:'اكتب كلمة أو موضوعاً للبحث في TGPU.',found:n=>`تم العثور على ${n} نتيجة`,none:'لم يتم العثور على نتيجة مطابقة.',try:'جرّب كلمة أخرى مثل',all:'الكل'}
-  };
-  const params = new URLSearchParams(location.search); const queryParam = params.get('q') || '';
-  const browserLang = (params.get('lang') || document.documentElement.lang || navigator.language || 'ms').toLowerCase();
-  const lang = browserLang.startsWith('ar') ? 'ar' : browserLang.startsWith('en') ? 'en' : 'ms'; const T = ui[lang];
-  if(lang==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'} else document.documentElement.lang=lang;
-  const input=document.getElementById('site-search'), form=document.getElementById('search-form'), results=document.getElementById('results'), title=document.getElementById('result-title'), status=document.getElementById('result-status'), start=document.getElementById('start-here'), filters=document.getElementById('filters');
-  form.querySelector('button').textContent=T.search; let active='All';
-  const categories=['All',...new Set(DATA.map(x=>x.category))]; categories.forEach(cat=>{const b=document.createElement('button');b.type='button';b.className='filter'+(cat==='All'?' active':'');b.textContent=cat==='All'?T.all:cat;b.dataset.category=cat;b.addEventListener('click',()=>{active=cat;filters.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));run(input.value)});filters.appendChild(b)});
-  function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘]/g,"'")}
-  function score(item,q){const phrase=norm(q),tokens=phrase.split(/\s+/).filter(Boolean),t=norm(item.title),d=norm(item.description),k=norm(item.keywords),c=norm(item.category);let s=0;if(t.includes(phrase))s+=30;if(k.includes(phrase))s+=18;if(d.includes(phrase))s+=12;for(const token of tokens){if(t.includes(token))s+=10;if(k.includes(token))s+=6;if(d.includes(token))s+=4;if(c.includes(token))s+=2}return s}
-  function run(raw){const q=raw.trim();results.innerHTML='';if(!q){title.textContent=T.start;status.textContent=T.prompt;start.hidden=false;history.replaceState(null,'',location.pathname);return}start.hidden=true;const matches=DATA.map(item=>({...item,score:score(item,q)})).filter(x=>x.score>0&&(active==='All'||x.category===active)).sort((a,b)=>b.score-a.score||a.title.localeCompare(b.title)).slice(0,30);title.textContent=q;status.textContent=matches.length?T.found(matches.length):T.none;if(!matches.length){const box=document.createElement('div');box.className='empty';box.innerHTML=`<strong>${T.none}</strong><div class="suggestions"></div>`;const sugg=box.querySelector('.suggestions');['solat','qiraat','masjid','biasiswa','kerja','SME','fatwa'].forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=x;b.onclick=()=>{input.value=x;run(x)};sugg.appendChild(b)});results.appendChild(box)} else matches.forEach(item=>{const a=document.createElement('a');a.className='result';a.href=item.url;const text=document.createElement('div'),cat=document.createElement('span'),h=document.createElement('h3'),p=document.createElement('p'),arrow=document.createElement('span');cat.className='result-category';cat.textContent=item.category;h.textContent=item.title;p.textContent=item.description;arrow.className='arrow';arrow.textContent='→';text.append(cat,h,p);a.append(text,arrow);results.appendChild(a)});const u=new URL(location.href);u.searchParams.set('q',q);if(lang!=='ms')u.searchParams.set('lang',lang);history.replaceState(null,'',u.pathname+u.search)}
-  form.addEventListener('submit',e=>{e.preventDefault();run(input.value)});input.addEventListener('input',()=>{if(input.value.trim().length>=2||!input.value.trim())run(input.value)});
-  if(queryParam){input.value=queryParam;run(queryParam)} else {title.textContent=T.start;status.textContent=T.prompt} setTimeout(()=>input.focus(),120);
-})();
-</script>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../"><img src="../assets/tgpu-logo.png" alt="TGPU Legacy logo"><span>TGPU Search<small>TGPU Legacy · Academy · Learning Hub</small></span></a>
+    <nav class="header-links" aria-label="Search navigation"><a class="home-link" href="../">TGPU Legacy</a><a href="../academy/">Academy</a><a href="../academy/learning-hub/">Learning Hub</a></nav>
+  </div>
+</header>
+<section class="search-cover">
+  <div class="wrap cover-inner">
+    <div class="cover-copy">
+      <p class="eyebrow">CARI • TEMUI • BELAJAR</p>
+      <h1>Cari di seluruh TGPU</h1>
+      <p class="lead">Cari topik, kelas, sumber atau panduan merentas TGPU Legacy, TGPU Academy, Quran, Islamic Learning dan Learning Hub.</p>
+      <div class="search-shell">
+        <form class="search-form" id="search-form" role="search">
+          <label for="site-search" hidden>Cari di TGPU</label>
+          <input id="site-search" name="q" type="search" autocomplete="off" enterkeyhint="search" placeholder="Contoh: wuduk, qiraat, masjid, biasiswa, SME…">
+          <button type="submit">Cari</button>
+        </form>
+        <p class="hint">Tip: anda boleh cari dalam Bahasa Melayu, English atau العربية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<main class="content">
+  <div class="wrap">
+    <div class="filters" id="filters" aria-label="Tapis hasil carian"></div>
+    <div class="status"><div><h2 id="result-title">Mula mencari</h2><p id="result-status">Taip satu perkataan atau topik untuk mencari kandungan TGPU.</p></div></div>
+    <div class="results" id="results"></div>
+    <section id="start-here">
+      <div class="quick-grid">
+        <a class="quick" href="../academy/quran/"><b>TGPU Quran</b><span>Bacaan, Qiraat, kisah, Ayat al-Ahkam dan Huffaz.</span></a>
+        <a class="quick" href="../academy/islamic-learning/"><b>Islamic Learning</b><span>Rukun, wuduk, solat, puasa, zakat dan adab.</span></a>
+        <a class="quick" href="../academy/learning-hub/"><b>Learning Hub</b><span>Sumber Malaysia, pendidikan, kerjaya, budaya dan Islam.</span></a>
+        <a class="quick" href="../academy/learning-hub/explore-masjid-malaysia.html"><b>Explore Masjid</b><span>Cari masjid dan sumber rasmi berkaitan.</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>© TGPU Legacy · Ilmu untuk Dunia, Amal untuk Akhirat.</span><span><a href="../support/">Support TGPU</a> · <a href="../academy/collaboration.html">Collaboration</a></span></div></footer>
+<script src="search.js?v=20260920" defer></script>
 </body>
 </html>
