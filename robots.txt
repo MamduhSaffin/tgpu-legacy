@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tgpu.my/sitemap.xml
+Sitemap: https://tgpu.my/sitemap-community.xml
