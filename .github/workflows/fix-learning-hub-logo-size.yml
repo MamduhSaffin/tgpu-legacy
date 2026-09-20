@@ -1,0 +1,57 @@
+name: Fix Learning Hub compact logo sizing
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-learning-hub-logo-size.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add compact-logo sizing override
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('academy/academy.css')
+          s=p.read_text(encoding='utf-8')
+          block='''
+
+/* Official TGPU compact brand lockup in Learning Hub navigation. */
+.hub-nav .brand img[src*="tgpu-header.svg"]{
+  width:190px!important;
+  height:48px!important;
+  max-width:42vw!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.hub-nav .brand:has(img[src*="tgpu-header.svg"]) .brand-text{display:none!important}
+html[lang="ar"] .hub-nav .brand img[src*="tgpu-header.svg"]{object-position:right center!important}
+@media(max-width:620px){
+  .hub-nav .brand img[src*="tgpu-header.svg"]{width:158px!important;height:42px!important;max-width:52vw!important}
+}
+'''
+          if 'Official TGPU compact brand lockup in Learning Hub navigation.' not in s:
+              s += block
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit navbar logo fix
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'TGPU Brand Maintenance'
+          git config user.email 'mamduh@tgpugulf.com'
+          git add academy/academy.css
+          git commit -m 'Render TGPU Learning Hub compact logo clearly'
+          git push origin HEAD:main
