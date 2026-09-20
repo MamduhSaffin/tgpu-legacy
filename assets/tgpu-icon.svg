@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">TGPU</title>
+  <desc id="desc">TGPU book and Islamic arch icon.</desc>
+  <rect width="180" height="180" rx="40" fill="#fff"/>
+  <path d="M44 64C65 53 80 33 90 12c10 21 25 41 46 52" fill="none" stroke="#087d79" stroke-width="10" stroke-linecap="round"/>
+  <path d="M69 66c8-8 15-18 21-31 6 13 13 23 21 31" fill="none" stroke="#d4a12d" stroke-width="7" stroke-linecap="round"/>
+  <path d="M24 82c24-8 45-5 66 9v55c-20-14-42-17-66-9Z" fill="#0a416f"/>
+  <path d="M156 82c-24-8-45-5-66 9v55c20-14 42-17 66-9Z" fill="#087d79"/>
+  <path d="M90 89v59" stroke="#fff" stroke-width="6"/>
+</svg>
