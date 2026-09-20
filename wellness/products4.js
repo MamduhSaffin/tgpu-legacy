@@ -80,7 +80,7 @@
             <div class="poster-brand-sub" data-i18n="posterTagline">NATURAL WELLNESS • A HEALTHIER TOMORROW</div>
           </div>
           <div class="poster-motto" data-i18n="posterMotto">Nature’s Goodness For A Better You</div>
-          <div class="poster-crest"><img src="../assets/tgpu-logo.png" alt="TGPU"><span>TGPU<br><small>TOK GURU<br>PULAU UBI</small></span></div>
+          <div class="poster-crest"><img src="../assets/tgpu-official.svg" alt="TGPU"><span>TGPU<br><small>TOK GURU<br>PULAU UBI</small></span></div>
         </div>
 
         <div class="poster-product-grid">
