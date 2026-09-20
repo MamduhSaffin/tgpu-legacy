@@ -32,7 +32,7 @@
       document.head.appendChild(schema);
     }
     document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]').forEach(link => {
-      link.href = 'assets/tgpu-logo.png?v=20260913-mainbrand';
+      link.href = 'assets/tgpu-official.svg?v=20260913-mainbrand';
     });
 
     if (!document.getElementById('tgpu-official-brand-style')) {
@@ -90,7 +90,7 @@
 
       const emblem = document.createElement('img');
       emblem.className = 'tgpu-official-emblem';
-      emblem.src = 'assets/tgpu-logo.png?v=20260913-mainbrand';
+      emblem.src = 'assets/tgpu-official.svg?v=20260913-mainbrand';
       emblem.alt = 'TGPU Legacy — Tok Guru Pulau Ubi';
       emblem.width = 900;
       emblem.height = 900;
