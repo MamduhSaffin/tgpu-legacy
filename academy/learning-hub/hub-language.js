@@ -46,6 +46,43 @@
     nav.appendChild(switcher);
   }
 
+  // Keep the Sarong Music Run living-heritage feature visible on every Learning Hub homepage.
+  if(isIndex){
+    const labels={
+      ms:{heading:'Budaya, Ilmu & Warisan',title:'🇲🇾 Sarong Music Run 2026 — Warisan Hidup',desc:'Catatan asal dari acara: sarong, Boria, tarian pelbagai budaya, keluarga & foto dari lokasi'},
+      en:{heading:'Culture, Knowledge & Heritage',title:'🇲🇾 Sarong Music Run 2026 — Living Heritage',desc:'Original on-location feature: sarong, Boria, multicultural performances, family moments & event photos'},
+      ar:{heading:'الثقافة والمعرفة والتراث',title:'🇲🇾 Sarong Music Run 2026 — تراث حي',desc:'تجربة أصلية من الحدث: السارونغ، Boria، عروض متعددة الثقافات، العائلة وصور من الموقع'}
+    };
+    const cfg=labels[lang];
+    const groups=[...document.querySelectorAll('.directory-group,.dir')];
+    const culture=groups.find(group=>{
+      const h=group.querySelector('h2,h3');
+      return h && (h.textContent||'').trim()===cfg.heading;
+    });
+    if(culture && !culture.querySelector('a[href*="sarong-music-run-2026-living-heritage.html"]')){
+      const holder=culture.querySelector('.directory-links') || culture;
+      const a=document.createElement('a');
+      a.href='sarong-music-run-2026-living-heritage.html';
+      a.className=(culture.classList.contains('directory-group')?'directory-link ':'')+'sarong-feature-link';
+      if(culture.classList.contains('directory-group')){
+        a.innerHTML=`<span><b>${cfg.title}</b><small>${cfg.desc}</small></span><span>→</span>`;
+      }else{
+        a.innerHTML=`<strong>${cfg.title}</strong><small>${cfg.desc}</small><span aria-hidden="true">→</span>`;
+      }
+      holder.prepend(a);
+    }
+    if(!document.getElementById('sarong-feature-style')){
+      const style=document.createElement('style');
+      style.id='sarong-feature-style';
+      style.textContent=`
+        .sarong-feature-link{background:linear-gradient(135deg,#0f5132,#174c39)!important;color:#fff!important;border:1px solid #d5b76c!important;box-shadow:0 8px 22px rgba(18,61,38,.14)!important}
+        .sarong-feature-link b,.sarong-feature-link strong{color:#fff!important}.sarong-feature-link small{display:block;color:rgba(255,255,255,.78)!important;margin-top:.18rem;line-height:1.38}.sarong-feature-link>span:last-child{color:#efdca8!important}
+        .dir>a.sarong-feature-link{display:grid!important;grid-template-columns:1fr auto;gap:.2rem .8rem;align-items:center;padding:.95rem 1rem!important;margin-bottom:.7rem!important;text-decoration:none}.dir>a.sarong-feature-link small{grid-column:1/2}.dir>a.sarong-feature-link>span{grid-column:2;grid-row:1/3;color:#efdca8;font-weight:900}
+      `;
+      document.head.appendChild(style);
+    }
+  }
+
   const menu=document.querySelector('.hub-menu');
   if(menu){
     if(lang==='ar') menu.textContent='القائمة';
