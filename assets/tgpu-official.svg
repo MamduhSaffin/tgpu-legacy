@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+  <title id="title">TGPU Legacy</title>
+  <desc id="desc">Official TGPU master logo in deep green, teal and gold.</desc>
+  <rect width="640" height="220" rx="28" fill="#fffdf8"/>
+  <g transform="translate(34 24)">
+    <path d="M70 18 108 54 96 66 70 42 44 66 32 54Z" fill="#0b6b68"/>
+    <path d="M22 82c22-8 44-8 66 2v52c-21-8-43-8-66-1Z" fill="none" stroke="#123b2c" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M118 82c-22-8-44-8-66 2v52c21-8 43-8 66-1Z" fill="none" stroke="#123b2c" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M70 83v54" stroke="#c59b4f" stroke-width="7" stroke-linecap="round"/>
+    <path d="M53 67 70 52l17 15" fill="none" stroke="#c59b4f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="188" y="92" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="800" letter-spacing="2" fill="#123b2c">TGPU</text>
+  <text x="192" y="136" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="9" fill="#0b6b68">LEGACY</text>
+  <line x1="192" y1="158" x2="558" y2="158" stroke="#c59b4f" stroke-width="3"/>
+  <text x="192" y="190" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" letter-spacing="3" fill="#5d6a63">TOK GURU PULAU UBI · tgpu.my</text>
+</svg>
