@@ -135,6 +135,70 @@ html[dir="rtl"] .latin{
   unicode-bidi:isolate
 }
 
+/* Unified multilingual hero treatment.
+   Matches the proportions and spacing of the Malay Learning Hub design. */
+.page > .hero{
+  margin-top:2rem!important;
+  margin-bottom:2rem!important;
+  padding:clamp(2.2rem,5vw,4rem)!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(236,214,156,.18),transparent 28%),
+    linear-gradient(135deg,#0b2819,#14532d)!important;
+  color:#fff!important;
+  box-shadow:0 20px 60px rgba(18,61,38,.14)!important;
+  overflow:hidden;
+}
+.page > .hero .eyebrow{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  padding:.5rem .85rem;
+  border-radius:999px;
+  background:rgba(213,183,108,.16);
+  color:#efdca8!important;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.page > .hero h1{
+  max-width:1000px!important;
+  margin:.55rem 0 1rem!important;
+  color:#fff!important;
+  font-size:clamp(2.7rem,5vw,4.5rem)!important;
+  line-height:1.08!important;
+  overflow-wrap:anywhere;
+}
+.page > .hero p{
+  max-width:900px!important;
+  color:rgba(255,255,255,.86)!important;
+  font-size:1.08rem!important;
+  line-height:1.75!important;
+}
+.page > .hero .notice{
+  margin:1.35rem 0 0!important;
+  padding:1rem 1.15rem!important;
+  border-inline-start:5px solid #c6a15b!important;
+  border-radius:0 16px 16px 0!important;
+  background:rgba(255,248,233,.98)!important;
+  color:#5b491f!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+}
+.page > .hero .notice strong{color:#3f3214!important}
+
+html[dir="rtl"] .page > .hero{
+  background:
+    radial-gradient(circle at 12% 12%,rgba(236,214,156,.18),transparent 28%),
+    linear-gradient(225deg,#0b2819,#14532d)!important;
+  text-align:right
+}
+html[dir="rtl"] .page > .hero h1,
+html[dir="rtl"] .page > .hero p{margin-right:0;margin-left:auto}
+html[dir="rtl"] .page > .hero .notice{
+  border-radius:16px 0 0 16px!important;
+  text-align:right
+}
+
 @media(max-width:900px){
   .lang-switch{order:3}
 }
@@ -146,4 +210,15 @@ html[dir="rtl"] .latin{
   }
   .lang-switch a{flex:1}
   html[dir="rtl"] .nav-links{margin-right:0}
+  .page > .hero{
+    margin-top:1rem!important;
+    margin-bottom:1.5rem!important;
+    padding:1.55rem!important;
+    border-radius:22px!important
+  }
+  .page > .hero h1{
+    font-size:clamp(2.25rem,11vw,3.35rem)!important;
+    line-height:1.12!important
+  }
+  .page > .hero p{font-size:1rem!important}
 }
