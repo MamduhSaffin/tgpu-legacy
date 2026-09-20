@@ -315,7 +315,7 @@ function setLanguage(candidate,updateUrl=false){
  document.querySelectorAll('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',dict[el.dataset.i18nAria]));
  document.querySelectorAll('.lang').forEach(el=>{const active=el.dataset.lang===lang;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));const u=new URL(location.href);u.searchParams.set('lang',el.dataset.lang);el.href=u.pathname+u.search+u.hash;});
  document.querySelectorAll('[data-education]').forEach(el=>el.href=educationPages[lang]);
- document.getElementById('whatsappLink').href='https://wa.me/60128681339?text='+encodeURIComponent(whatsappMessages[lang]);
+ document.getElementById('whatsappLink').href='https://wa.me/60126413812?text='+encodeURIComponent(whatsappMessages[lang]);
  document.querySelector('meta[name="description"]').content=dict.metaDescription;document.querySelector('meta[property="og:description"]').content=dict.metaDescription;
  const canonical='https://mamduhsaffin.github.io/tgpu-legacy/wellness/'+(lang==='ms'?'':'?lang='+lang);
  document.querySelector('link[rel="canonical"]').href=canonical;document.querySelector('meta[property="og:url"]').content=canonical;
