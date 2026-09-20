@@ -1,4 +1,5 @@
-@import url("academy-base.css?v=20260915");
+@import url("academy-base.css?v=20260920");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
 
 /* IEC logo hotfix: do not render the older SVG <img>. Use the real JPG asset instead. */
 .partner-logo{display:none!important}
@@ -9,6 +10,133 @@
 .collab-lockup .collab-logo{display:block;width:150px;height:150px;object-fit:contain;background:#fff;border:1px solid #dfe7df;border-radius:24px;padding:12px;box-shadow:0 10px 28px rgba(18,61,38,.08)}
 .collab-lockup .collab-x{font-size:2rem;font-weight:800;color:#8a6b2d;line-height:1}
 .collab-lockup .collab-label{width:100%;text-align:center;margin-top:-4px;color:#667067;font-size:.8rem;font-weight:700;letter-spacing:.04em}
+
+/* ------------------------------------------------------------------
+   Multilingual Academy consistency layer
+   English and Arabic pages follow the same spacing/proportions as BM.
+   ------------------------------------------------------------------ */
+html[lang="en"] .page > .hero,
+html[lang="ar"] .page > .hero{
+  margin-top:2rem!important;
+  margin-bottom:2rem!important;
+  padding:clamp(2.2rem,5vw,4rem)!important;
+  border-radius:30px!important;
+  background:radial-gradient(circle at 88% 12%,rgba(236,214,156,.18),transparent 28%),linear-gradient(135deg,#0b2819,#14532d)!important;
+  color:#fff!important;
+  box-shadow:0 20px 60px rgba(18,61,38,.14)!important;
+  overflow:hidden!important;
+}
+html[lang="en"] .page > .hero .eyebrow,
+html[lang="ar"] .page > .hero .eyebrow{
+  display:inline-flex!important;
+  align-items:center!important;
+  width:max-content!important;
+  max-width:100%!important;
+  padding:.5rem .85rem!important;
+  border-radius:999px!important;
+  background:rgba(213,183,108,.16)!important;
+  color:#efdca8!important;
+  font-weight:800!important;
+  letter-spacing:.07em!important;
+}
+html[lang="en"] .page > .hero h1,
+html[lang="ar"] .page > .hero h1{
+  max-width:1000px!important;
+  margin:.55rem 0 1rem!important;
+  color:#fff!important;
+  font-size:clamp(2.7rem,5vw,4.5rem)!important;
+  line-height:1.08!important;
+  overflow-wrap:anywhere!important;
+}
+html[lang="en"] .page > .hero p,
+html[lang="ar"] .page > .hero p{
+  max-width:900px!important;
+  color:rgba(255,255,255,.86)!important;
+  font-size:1.08rem!important;
+  line-height:1.75!important;
+}
+html[lang="en"] .page > .hero .notice,
+html[lang="ar"] .page > .hero .notice{
+  margin:1.35rem 0 0!important;
+  padding:1rem 1.15rem!important;
+  border-inline-start:5px solid #c6a15b!important;
+  border-radius:0 16px 16px 0!important;
+  background:rgba(255,248,233,.98)!important;
+  color:#5b491f!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.08)!important;
+}
+html[lang="en"] .page > .hero .notice strong,
+html[lang="ar"] .page > .hero .notice strong{color:#3f3214!important}
+
+/* Arabic: readable typography + true RTL layout throughout Academy. */
+html[lang="ar"] body{
+  direction:rtl;
+  text-align:right;
+  font-family:"Noto Naskh Arabic","Amiri",serif;
+  font-size:1.04rem;
+  line-height:1.85;
+}
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6,
+html[lang="ar"] nav,
+html[lang="ar"] .brand-text,
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .button,
+html[lang="ar"] .card-badge,
+html[lang="ar"] .tag{
+  font-family:"Cairo","Noto Naskh Arabic",sans-serif!important;
+}
+html[lang="ar"] .nav-links{margin-left:0!important;margin-right:auto!important;direction:rtl}
+html[lang="ar"] .hero-grid,
+html[lang="ar"] .split,
+html[lang="ar"] .grid,
+html[lang="ar"] .actions,
+html[lang="ar"] .footer-grid{direction:rtl}
+html[lang="ar"] .hero,
+html[lang="ar"] .card,
+html[lang="ar"] .panel,
+html[lang="ar"] .section-head,
+html[lang="ar"] .note{text-align:right}
+html[lang="ar"] .list{padding-left:0;padding-right:20px}
+html[lang="ar"] .note{border-left:0;border-right:4px solid var(--gold)}
+html[lang="ar"] .page > .hero{
+  background:radial-gradient(circle at 12% 12%,rgba(236,214,156,.18),transparent 28%),linear-gradient(225deg,#0b2819,#14532d)!important;
+}
+html[lang="ar"] .page > .hero h1,
+html[lang="ar"] .page > .hero p{margin-right:0!important;margin-left:auto!important}
+html[lang="ar"] .page > .hero .notice{border-radius:16px 0 0 16px!important;text-align:right!important}
+
+/* Keep translated cards and content widths visually consistent with BM. */
+html[lang="en"] main.page > .wrap.section,
+html[lang="ar"] main.page > .wrap.section{width:min(1160px,calc(100% - 36px))}
+html[lang="en"] main.page .grid,
+html[lang="ar"] main.page .grid{gap:1rem!important}
+html[lang="en"] main.page .card,
+html[lang="ar"] main.page .card{border-radius:22px!important;padding:1.35rem!important}
+
+@media(max-width:920px){
+  html[lang="ar"] .nav-links{margin-right:0!important;width:100%}
+}
+@media(max-width:760px){
+  html[lang="en"] .page > .hero,
+  html[lang="ar"] .page > .hero{
+    margin-top:1rem!important;
+    margin-bottom:1.5rem!important;
+    padding:1.55rem!important;
+    border-radius:22px!important;
+  }
+  html[lang="en"] .page > .hero h1,
+  html[lang="ar"] .page > .hero h1{
+    font-size:clamp(2.25rem,11vw,3.35rem)!important;
+    line-height:1.12!important;
+  }
+  html[lang="en"] .page > .hero p,
+  html[lang="ar"] .page > .hero p{font-size:1rem!important}
+}
 
 @media(max-width:620px){
   .partner-kicker::before{width:150px;height:150px;margin-left:auto;margin-right:auto}
