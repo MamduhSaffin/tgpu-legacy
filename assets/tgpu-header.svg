@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 120" role="img" aria-labelledby="title desc">
+  <title id="title">TGPU Learning Hub</title>
+  <desc id="desc">Compact TGPU Learning Hub header logo.</desc>
+  <g transform="translate(7 5)">
+    <path d="M20 37C42 27 58 10 67 1c9 19 25 36 47 46" fill="none" stroke="#087d79" stroke-width="7" stroke-linecap="round"/>
+    <path d="M48 40c8-7 14-16 19-27 5 11 11 20 19 27" fill="none" stroke="#d4a12d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M2 54c25-8 48-5 69 9v36c-20-14-43-17-69-9Z" fill="#0a416f"/>
+    <path d="M132 54c-25-8-48-5-69 9v36c20-14 43-17 69-9Z" fill="#087d79"/>
+    <path d="M67 61v40" stroke="#fff" stroke-width="4"/>
+  </g>
+  <text x="162" y="64" font-family="Arial,Helvetica,sans-serif" font-size="62" font-weight="900" letter-spacing="1" fill="#062f5a">TGPU</text>
+  <text x="164" y="97" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="800" letter-spacing="6" fill="#087d79">LEARNING HUB</text>
+  <text x="495" y="97" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="800" fill="#d4a12d">tgpu.my</text>
+</svg>
