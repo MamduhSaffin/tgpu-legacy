@@ -11,6 +11,39 @@
 .collab-lockup .collab-x{font-size:2rem;font-weight:800;color:#8a6b2d;line-height:1}
 .collab-lockup .collab-label{width:100%;text-align:center;margin-top:-4px;color:#667067;font-size:.8rem;font-weight:700;letter-spacing:.04em}
 
+/* Global BM / EN / Arabic language switcher.
+   Kept here so pages stay correct even if a page omits hub-language.css. */
+.lang-switch{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:.25rem!important;
+  padding:.22rem!important;
+  border:1px solid rgba(21,61,49,.16)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.94)!important;
+  box-shadow:0 4px 14px rgba(17,48,38,.08)!important;
+  white-space:nowrap!important;
+}
+.lang-switch a{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:42px!important;
+  min-height:34px!important;
+  padding:.38rem .65rem!important;
+  border-radius:999px!important;
+  text-decoration:none!important;
+  font-size:.76rem!important;
+  font-weight:800!important;
+  letter-spacing:.02em!important;
+  color:#244637!important;
+  background:transparent!important;
+  border:0!important;
+  opacity:1!important;
+}
+.lang-switch a[aria-current="page"]{background:#123d26!important;color:#fff!important}
+.lang-switch a[lang="ar"]{font-family:"Cairo",sans-serif!important;font-size:.82rem!important;letter-spacing:0!important}
+
 /* ------------------------------------------------------------------
    Multilingual Academy consistency layer
    English and Arabic pages follow the same spacing/proportions as BM.
@@ -120,8 +153,11 @@ html[lang="ar"] main.page .card{border-radius:22px!important;padding:1.35rem!imp
 
 @media(max-width:920px){
   html[lang="ar"] .nav-links{margin-right:0!important;width:100%}
+  .lang-switch{order:3}
 }
 @media(max-width:760px){
+  .lang-switch{width:100%!important;justify-content:center!important;margin:.35rem 0 .1rem!important}
+  .lang-switch a{flex:1!important}
   html[lang="en"] .page > .hero,
   html[lang="ar"] .page > .hero{
     margin-top:1rem!important;
