@@ -83,6 +83,19 @@
     }
   }
 
+  // The detailed square logo belongs in hero areas; the navbar uses the compact lockup.
+  if(!document.getElementById('tgpu-hub-brand-style')){
+    const style=document.createElement('style');
+    style.id='tgpu-hub-brand-style';
+    style.textContent=`
+      .hub-nav .brand img[src*="tgpu-header.svg"]{width:190px!important;height:48px!important;max-width:42vw!important;object-fit:contain!important;object-position:left center!important;border:0!important;border-radius:0!important;background:transparent!important}
+      .hub-nav .brand:has(img[src*="tgpu-header.svg"]) .brand-text{display:none!important}
+      html[lang="ar"] .hub-nav .brand img[src*="tgpu-header.svg"]{object-position:right center!important}
+      @media(max-width:620px){.hub-nav .brand img[src*="tgpu-header.svg"]{width:158px!important;height:42px!important;max-width:52vw!important}}
+    `;
+    document.head.appendChild(style);
+  }
+
   const menu=document.querySelector('.hub-menu');
   if(menu){
     if(lang==='ar') menu.textContent='القائمة';
