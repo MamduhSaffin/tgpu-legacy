@@ -32,7 +32,7 @@
       document.head.appendChild(schema);
     }
     document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]').forEach(link => {
-      link.href = 'assets/tgpu-official.svg?v=20260913-mainbrand';
+      link.href = 'assets/tgpu-icon.svg?v=20260920-brand';
     });
 
     if (!document.getElementById('tgpu-official-brand-style')) {
@@ -46,26 +46,36 @@
           gap:10px;
         }
         .tgpu-official-emblem {
-          width:62px;
-          height:62px;
-          flex:0 0 62px;
+          width:210px;
+          height:54px;
+          flex:0 0 210px;
           object-fit:contain;
-          object-position:center;
+          object-position:left center;
           border-radius:0;
           background:transparent;
           box-shadow:none;
         }
+        .site-header .brand.tgpu-official-brand .brand-name,
+        footer .footer-brand.tgpu-official-brand .brand-name { display:none !important; }
         footer .tgpu-official-emblem {
-          width:68px;
-          height:68px;
-          flex-basis:68px;
+          width:220px;
+          height:58px;
+          flex-basis:220px;
+        }
+        .tgpu-hero-brand {
+          width:min(270px,72vw);
+          height:auto;
+          display:block;
+          margin:0 0 18px;
+          border-radius:22px;
+          box-shadow:0 16px 46px rgba(0,0,0,.18);
         }
         @media (max-width:700px) {
           .site-header .brand.tgpu-official-brand { gap:7px; }
           .site-header .tgpu-official-emblem {
-            width:52px;
-            height:52px;
-            flex-basis:52px;
+            width:165px;
+            height:46px;
+            flex-basis:165px;
           }
           .site-header .brand-name { font-size:24px; }
           .site-header .brand-name small {
@@ -74,10 +84,11 @@
             margin-top:4px;
           }
           footer .tgpu-official-emblem {
-            width:58px;
-            height:58px;
-            flex-basis:58px;
+            width:175px;
+            height:48px;
+            flex-basis:175px;
           }
+          .tgpu-hero-brand { width:min(210px,62vw); margin-bottom:14px; }
         }
       `;
       document.head.appendChild(style);
@@ -90,8 +101,8 @@
 
       const emblem = document.createElement('img');
       emblem.className = 'tgpu-official-emblem';
-      emblem.src = 'assets/tgpu-official.svg?v=20260913-mainbrand';
-      emblem.alt = 'TGPU Legacy — Tok Guru Pulau Ubi';
+      emblem.src = 'assets/tgpu-header.svg?v=20260920-brand';
+      emblem.alt = 'TGPU Learning Hub — tgpu.my';
       emblem.width = 900;
       emblem.height = 900;
       brand.prepend(emblem);
@@ -100,6 +111,17 @@
 
     attach(document.querySelector('.site-header .brand'));
     attach(document.querySelector('footer .footer-brand'));
+
+    const heroCopy = document.querySelector('.hero .hero-copy');
+    if (heroCopy && !heroCopy.querySelector('.tgpu-hero-brand')) {
+      const heroLogo = document.createElement('img');
+      heroLogo.className = 'tgpu-hero-brand';
+      heroLogo.src = 'assets/tgpu-official.svg?v=20260920-hero';
+      heroLogo.alt = 'TGPU Learning Hub — Knowledge, Education, Community';
+      heroLogo.width = 700;
+      heroLogo.height = 700;
+      heroCopy.prepend(heroLogo);
+    }
   };
 
   const injectEcosystem = () => {
