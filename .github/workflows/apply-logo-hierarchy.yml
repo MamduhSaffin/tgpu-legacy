@@ -1,0 +1,74 @@
+name: Apply TGPU logo hierarchy
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-logo-hierarchy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply compact header, icon favicon and full hero logo
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # Root legacy pages: correct favicon references where present.
+          for name in ['index.html','en.html','ar.html']:
+              p=Path(name)
+              s=p.read_text(encoding='utf-8')
+              s=s.replace('assets/tgpu-official.svg?v=20260913-mainbrand2','assets/tgpu-icon.svg?v=20260920-brand')
+              s=s.replace('href="assets/tgpu-official.svg"','href="assets/tgpu-icon.svg?v=20260920-brand"')
+              p.write_text(s,encoding='utf-8')
+
+          # Learning Hub language home pages: compact logo in navbar, icon-only favicon.
+          for name in [
+              'academy/learning-hub/index.html',
+              'academy/learning-hub/index-en.html',
+              'academy/learning-hub/index-ar.html',
+          ]:
+              p=Path(name)
+              s=p.read_text(encoding='utf-8')
+              s=s.replace('href="../../assets/tgpu-official.svg"','href="../../assets/tgpu-icon.svg?v=20260920-brand"')
+              s=s.replace('src="../../assets/tgpu-official.svg" alt="TGPU Learning Hub logo"','src="../../assets/tgpu-header.svg?v=20260920-brand" alt="TGPU Learning Hub"')
+              p.write_text(s,encoding='utf-8')
+
+          # Root shared JS drives BM/EN/AR home branding.
+          p=Path('assets/legacy/site.js')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace("link.href = 'assets/tgpu-official.svg?v=20260913-mainbrand';", "link.href = 'assets/tgpu-icon.svg?v=20260920-brand';")
+          s=s.replace("emblem.src = 'assets/tgpu-official.svg?v=20260913-mainbrand';", "emblem.src = 'assets/tgpu-header.svg?v=20260920-brand';")
+          s=s.replace("emblem.alt = 'TGPU Legacy — Tok Guru Pulau Ubi';", "emblem.alt = 'TGPU Learning Hub — tgpu.my';")
+
+          old_style = '''        .tgpu-official-emblem {\n          width:62px;\n          height:62px;\n          flex:0 0 62px;\n          object-fit:contain;\n          object-position:center;\n          border-radius:0;\n          background:transparent;\n          box-shadow:none;\n        }\n        footer .tgpu-official-emblem {\n          width:68px;\n          height:68px;\n          flex-basis:68px;\n        }'''
+          new_style = '''        .tgpu-official-emblem {\n          width:210px;\n          height:54px;\n          flex:0 0 210px;\n          object-fit:contain;\n          object-position:left center;\n          border-radius:0;\n          background:transparent;\n          box-shadow:none;\n        }\n        .site-header .brand.tgpu-official-brand .brand-name,\n        footer .footer-brand.tgpu-official-brand .brand-name { display:none !important; }\n        footer .tgpu-official-emblem {\n          width:220px;\n          height:58px;\n          flex-basis:220px;\n        }\n        .tgpu-hero-brand {\n          width:min(270px,72vw);\n          height:auto;\n          display:block;\n          margin:0 0 18px;\n          border-radius:22px;\n          box-shadow:0 16px 46px rgba(0,0,0,.18);\n        }'''
+          if old_style in s:
+              s=s.replace(old_style,new_style,1)
+
+          s=s.replace('''          .site-header .tgpu-official-emblem {\n            width:52px;\n            height:52px;\n            flex-basis:52px;\n          }''','''          .site-header .tgpu-official-emblem {\n            width:165px;\n            height:46px;\n            flex-basis:165px;\n          }''')
+          s=s.replace('''          footer .tgpu-official-emblem {\n            width:58px;\n            height:58px;\n            flex-basis:58px;\n          }''','''          footer .tgpu-official-emblem {\n            width:175px;\n            height:48px;\n            flex-basis:175px;\n          }\n          .tgpu-hero-brand { width:min(210px,62vw); margin-bottom:14px; }''')
+
+          marker = "    attach(document.querySelector('.site-header .brand'));\n    attach(document.querySelector('footer .footer-brand'));"
+          addition = marker + "\n\n    const heroCopy = document.querySelector('.hero .hero-copy');\n    if (heroCopy && !heroCopy.querySelector('.tgpu-hero-brand')) {\n      const heroLogo = document.createElement('img');\n      heroLogo.className = 'tgpu-hero-brand';\n      heroLogo.src = 'assets/tgpu-official.svg?v=20260920-hero';\n      heroLogo.alt = 'TGPU Learning Hub — Knowledge, Education, Community';\n      heroLogo.width = 700;\n      heroLogo.height = 700;\n      heroCopy.prepend(heroLogo);\n    }"
+          if marker in s and "heroCopy.querySelector('.tgpu-hero-brand')" not in s:
+              s=s.replace(marker,addition,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit branding hierarchy
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'TGPU Brand Maintenance'
+          git config user.email 'mamduh@tgpugulf.com'
+          git add index.html en.html ar.html assets/legacy/site.js academy/learning-hub/index.html academy/learning-hub/index-en.html academy/learning-hub/index-ar.html
+          git commit -m 'Use compact TGPU header branding and full hero logo'
+          git push origin HEAD:main
