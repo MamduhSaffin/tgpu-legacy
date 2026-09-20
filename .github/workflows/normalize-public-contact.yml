@@ -1,0 +1,78 @@
+name: Normalize TGPU public contact
+
+on:
+  push:
+    paths:
+      - '.github/workflows/normalize-public-contact.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Replace personal and Gulf-only numbers across TGPU.my
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              '60129153527': '60126413812',
+              '+60129153527': '+60126413812',
+              '0129153527': '0126413812',
+              '012-915 3527': '012-641 3812',
+              '012 915 3527': '012 641 3812',
+              '+60 12-915 3527': '+60 12-641 3812',
+              '+60 12 915 3527': '+60 12 641 3812',
+              '60128681339': '60126413812',
+              '+60128681339': '+60126413812',
+              '0128681339': '0126413812',
+              '012-868 1339': '012-641 3812',
+              '012 868 1339': '012 641 3812',
+              '+60 12-868 1339': '+60 12-641 3812',
+              '+60 12 868 1339': '+60 12 641 3812',
+          }
+
+          skip = {'.git', 'node_modules'}
+          changed = []
+          for path in Path('.').rglob('*'):
+              if not path.is_file() or any(part in skip for part in path.parts):
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except (UnicodeDecodeError, OSError):
+                  continue
+              updated = text
+              for old, new in replacements.items():
+                  updated = updated.replace(old, new)
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(str(path))
+          print('Updated files:')
+          print('\n'.join(changed))
+          PY
+      - name: Verify personal and Gulf-only numbers are gone from TGPU.my source
+        shell: bash
+        run: |
+          if grep -RInE --exclude-dir=.git --exclude='normalize-public-contact.yml' '60129153527|0129153527|12-915[ -]3527|60128681339|0128681339|12-868[ -]1339' .; then
+            echo 'Old public number found; refusing to commit.'
+            exit 1
+          fi
+      - name: Commit normalized contacts
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No contact replacements required.'
+            exit 0
+          fi
+          git config user.name 'TGPU Contact Maintenance'
+          git config user.email 'mamduh@tgpugulf.com'
+          git add -A
+          git commit -m 'Remove personal number and standardize TGPU public contact'
+          git push origin HEAD:main
