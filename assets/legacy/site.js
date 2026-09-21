@@ -32,7 +32,7 @@
       document.head.appendChild(schema);
     }
     document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]').forEach(link => {
-      link.href = 'assets/tgpu-icon.svg?v=20260920-brand';
+      link.href = 'assets/tgpu-learning-hub-approved.png';
     });
 
     if (!document.getElementById('tgpu-official-brand-style')) {
@@ -46,9 +46,9 @@
           gap:10px;
         }
         .tgpu-official-emblem {
-          width:210px;
-          height:54px;
-          flex:0 0 210px;
+          width:112px;
+          height:auto;
+          flex:0 0 112px;
           object-fit:contain;
           object-position:left center;
           border-radius:0;
@@ -73,9 +73,9 @@
         @media (max-width:700px) {
           .site-header .brand.tgpu-official-brand { gap:7px; }
           .site-header .tgpu-official-emblem {
-            width:165px;
-            height:46px;
-            flex-basis:165px;
+            width:96px;
+            height:auto;
+            flex-basis:96px;
           }
           .site-header .brand-name { font-size:24px; }
           .site-header .brand-name small {
@@ -101,10 +101,10 @@
 
       const emblem = document.createElement('img');
       emblem.className = 'tgpu-official-emblem';
-      emblem.src = 'assets/tgpu-header.svg?v=20260920-brand';
+      emblem.src = 'assets/tgpu-learning-hub-approved.png';
       emblem.alt = 'TGPU Learning Hub — tgpu.my';
-      emblem.width = 900;
-      emblem.height = 900;
+      emblem.width = 1194;
+      emblem.height = 1317;
       brand.prepend(emblem);
       brand.classList.add('tgpu-official-brand');
     };
@@ -116,10 +116,10 @@
     if (heroCopy && !heroCopy.querySelector('.tgpu-hero-brand')) {
       const heroLogo = document.createElement('img');
       heroLogo.className = 'tgpu-hero-brand';
-      heroLogo.src = 'assets/tgpu-official.svg?v=20260920-hero';
+      heroLogo.src = 'assets/tgpu-learning-hub-approved.png';
       heroLogo.alt = 'TGPU Learning Hub — Knowledge, Education, Community';
-      heroLogo.width = 700;
-      heroLogo.height = 700;
+      heroLogo.width = 1194;
+      heroLogo.height = 1317;
       heroCopy.prepend(heroLogo);
     }
   };

@@ -44,7 +44,7 @@
     const nav = qs('nav', header || document);
     if (brand) {
       brand.href = './';
-      brand.innerHTML = '<img src="../../assets/tgpu-official.svg" alt="TGPU Learning Hub logo"><span class="brand-text">TGPU Learning<small>Learn • Understand • Create • Verify</small></span>';
+      brand.innerHTML = '<img src="../../assets/tgpu-learning-hub-approved.png" alt="TGPU Learning Hub logo"><span class="brand-text">TGPU Learning<small>Learn • Understand • Create • Verify</small></span>';
     }
     if (navWrap && nav) {
       nav.classList.add('nav-links');
