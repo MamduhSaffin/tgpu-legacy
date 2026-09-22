@@ -1,4 +1,4 @@
-name: Deploy TGPU Legacy with approved Learning Hub banner
+name: Deploy TGPU Legacy to GitHub Pages
 
 on:
   push:
@@ -25,10 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Rebuild approved Learning Hub banner
-        run: cat assets/learning-banner.b64.1 assets/learning-banner.b64.2 assets/learning-banner.b64.3 assets/learning-banner.b64.4 | base64 --decode > assets/tgpu-learning-hub-approved-banner.webp
-
-      - name: Verify banner
+      - name: Verify approved Learning Hub banner
         run: |
           test -s assets/tgpu-learning-hub-approved-banner.webp
           file assets/tgpu-learning-hub-approved-banner.webp
