@@ -1,0 +1,46 @@
+name: Deploy TGPU Legacy with approved Learning Hub banner
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: approved-learning-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rebuild approved Learning Hub banner
+        run: cat assets/learning-banner.b64.1 assets/learning-banner.b64.2 assets/learning-banner.b64.3 assets/learning-banner.b64.4 | base64 --decode > assets/tgpu-learning-hub-approved-banner.webp
+
+      - name: Verify banner
+        run: |
+          test -s assets/tgpu-learning-hub-approved-banner.webp
+          file assets/tgpu-learning-hub-approved-banner.webp
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
