@@ -25,25 +25,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Learning Hub banner with the approved logo
+      - name: Activate approved Learning Hub banner
         run: |
-          sudo apt-get update
-          sudo apt-get install -y imagemagick
+          test -s assets/tgpu-learning-hub-approved-banner.webp
 
-          # Keep the current visual style, but cover the generated mark and use the approved master logo.
-          convert assets/tgpu-learning-hub-approved-banner.webp -resize '1200x675^' -gravity center -extent 1200x675 /tmp/learning-base.png
-          convert assets/tgpu-learning-hub-approved.png -trim +repage -resize '145x155>' /tmp/learning-approved-logo.png
-          convert /tmp/learning-base.png -fill white -draw 'roundrectangle 44,16 442,190 20,20' /tmp/learning-card.png
-          convert /tmp/learning-card.png /tmp/learning-approved-logo.png -gravity northwest -geometry +170+24 -composite -quality 90 assets/tgpu-learning-hub-approved-banner.webp
-
-          # Use the approved banner for social sharing instead of the old legacy emblem.
+          # Use the approved banner for WhatsApp/Facebook previews instead of the old legacy emblem.
           for page in index.html en.html ar.html; do
             sed -i 's#https://tgpu.my/assets/tgpu-official.svg#https://tgpu.my/assets/tgpu-learning-hub-approved-banner.webp?v=20260922-approved-logo#g' "$page"
             sed -i 's#<meta property="og:image:width" content="512">#<meta property="og:image:width" content="1200">#g' "$page"
             sed -i 's#<meta property="og:image:height" content="512">#<meta property="og:image:height" content="675">#g' "$page"
           done
 
-          test -s assets/tgpu-learning-hub-approved-banner.webp
           file assets/tgpu-learning-hub-approved-banner.webp
 
       - name: Configure Pages
