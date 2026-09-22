@@ -25,26 +25,49 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate and activate approved Learning Hub banner
+      - name: Prepare official green-gold branding and metadata
         run: |
           set -euo pipefail
 
-          test -s assets/tgpu-learning-hub-approved.png
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+
+          test -s assets/tgpu-official.svg
+          test -s assets/tgpu-green-gold-social.svg
           test -s assets/tgpu-learning-hub-approved-banner.webp
 
+          # Generate the deployed PNG logo directly from the official green-gold SVG.
+          # Existing pages can keep their stable asset path while no longer serving the old blue artwork.
+          rsvg-convert -w 900 -h 900 assets/tgpu-official.svg -o assets/tgpu-learning-hub-approved.png
+          rsvg-convert -w 1200 -h 630 assets/tgpu-green-gold-social.svg -o assets/tgpu-social-preview-green-gold.png
+
           file assets/tgpu-learning-hub-approved.png | grep -Eqi 'PNG image data'
+          file assets/tgpu-social-preview-green-gold.png | grep -Eqi 'PNG image data'
           file assets/tgpu-learning-hub-approved-banner.webp | grep -Eqi 'Web/P image|WebP'
 
-          # Use the already-approved committed artwork.
-          # Do not rebuild or recompress banner assets during deployment.
+          # Remove stale GitHub Pages canonical/OG hostnames from deployed HTML.
+          while IFS= read -r -d '' page; do
+            sed -i 's#https://mamduhsaffin.github.io/tgpu-legacy#https://tgpu.my#g' "$page"
+            sed -i 's#https://tgpu.my/assets/tgpu-official.svg#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#g' "$page"
+            sed -i 's#https://tgpu.my/assets/tgpu-social-preview.jpg#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#g' "$page"
+          done < <(find . -type f -name '*.html' -print0)
+
+          # Homepage language variants use one reliable 1200x630 green-gold social card.
           for page in index.html en.html ar.html; do
             test -s "$page"
-            sed -i 's#https://tgpu.my/assets/tgpu-official.svg#https://tgpu.my/assets/tgpu-learning-hub-approved-banner.webp?v=20260922-approved-logo#g' "$page"
+            sed -i 's#https://tgpu.my/assets/tgpu-learning-hub-approved-banner.webp?v=20260922-approved-logo#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#g' "$page"
             sed -i 's#<meta property="og:image:width" content="512">#<meta property="og:image:width" content="1200">#g' "$page"
-            sed -i 's#<meta property="og:image:height" content="512">#<meta property="og:image:height" content="675">#g' "$page"
+            sed -i 's#<meta property="og:image:height" content="512">#<meta property="og:image:height" content="630">#g' "$page"
 
-            grep -q 'tgpu-learning-hub-approved-banner.webp' "$page"
-            ! grep -q 'https://tgpu.my/assets/tgpu-official.svg' "$page"
+            grep -q 'https://tgpu.my/' "$page"
+            grep -q 'tgpu-social-preview-green-gold.png' "$page"
+            ! grep -q 'mamduhsaffin.github.io/tgpu-legacy' "$page"
+          done
+
+          # Verify priority legacy pages no longer advertise the old GitHub Pages hostname.
+          for page in learn.html learn-en.html learn-ar.html classes.html classes-en.html classes-ar.html; do
+            test -s "$page"
+            ! grep -q 'mamduhsaffin.github.io/tgpu-legacy' "$page"
           done
 
       - name: Configure Pages
