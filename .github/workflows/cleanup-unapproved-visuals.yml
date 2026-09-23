@@ -1,0 +1,56 @@
+name: Remove unapproved TGPU Legacy visuals
+
+on:
+  push:
+    paths:
+      - '.github/workflows/cleanup-unapproved-visuals.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Keep official TGPU artwork only
+        run: |
+          set -euo pipefail
+          test -s assets/tgpu-official.svg
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+          convert -background '#fffdf8' assets/tgpu-official.svg -resize '1000x500>' -gravity center -extent 1200x630 -strip assets/tgpu-official-logo-social.png
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          social = 'https://tgpu.my/assets/tgpu-official-logo-social.png?v=20260923-approved-logo-only'
+          for p in Path('.').rglob('*.html'):
+              s = p.read_text(encoding='utf-8')
+              s = re.sub(r'https://(?:tgpu\.my|mamduhsaffin\.github\.io/tgpu-legacy)/assets/(?:tgpu-social-preview\.jpg|tgpu-social-approved-green-gold\.png)(?:\?[^"\']*)?', social, s)
+              s = re.sub(r'(<meta property="og:image" content=")[^"]*tgpu-social-preview\.jpg[^"]*(")', r'\1' + social + r'\2', s)
+              s = re.sub(r'(<meta name="twitter:image" content=")[^"]*tgpu-social-preview\.jpg[^"]*(")', r'\1' + social + r'\2', s)
+              s = re.sub(r'(<meta property="og:image:width" content=")[^"]+("[^>]*>)', r'\g<1>1200\2', s)
+              s = re.sub(r'(<meta property="og:image:height" content=")[^"]+("[^>]*>)', r'\g<1>630\2', s)
+              if p.name in {'index.html', 'en.html', 'ar.html'} and p.parent == Path('.'):
+                  s = re.sub(r'<link rel="preload" as="image" href="assets/legacy/hero\.webp">', '', s)
+                  s = re.sub(r'<img class="hero-image"[^>]*src="assets/legacy/hero\.webp"[^>]*>', '', s)
+              p.write_text(s, encoding='utf-8')
+
+          deploy = Path('.github/workflows/deploy-approved-learning-banner.yml')
+          deploy.write_text('''name: Deploy TGPU Legacy to GitHub Pages\n\non:\n  push:\n    branches:\n      - main\n  workflow_dispatch:\n\npermissions:\n  contents: read\n  pages: write\n  id-token: write\n\nconcurrency:\n  group: tgpu-legacy-pages\n  cancel-in-progress: true\n\njobs:\n  deploy:\n    environment:\n      name: github-pages\n      url: ${{ steps.deployment.outputs.page_url }}\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v4\n      - name: Configure Pages\n        uses: actions/configure-pages@v5\n      - name: Upload site\n        uses: actions/upload-pages-artifact@v3\n        with:\n          path: .\n      - name: Deploy\n        id: deployment\n        uses: actions/deploy-pages@v4\n''', encoding='utf-8')
+          PY
+          git rm -f --ignore-unmatch assets/legacy/hero.webp assets/tgpu-social-preview.jpg assets/tgpu-green-gold-social.svg assets/tgpu-social-approved-green-gold.png
+      - name: Commit cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git commit -m 'Remove unapproved TGPU Legacy artwork and keep official logo only'
+          git push origin HEAD:main
