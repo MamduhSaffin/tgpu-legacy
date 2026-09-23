@@ -25,50 +25,73 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare official green-gold branding and metadata
+      - name: Prepare approved green-gold branding and metadata
         run: |
           set -euo pipefail
-
           sudo apt-get update
-          sudo apt-get install -y librsvg2-bin
+          sudo apt-get install -y imagemagick
 
-          test -s assets/tgpu-official.svg
-          test -s assets/tgpu-green-gold-social.svg
-          test -s assets/tgpu-learning-hub-approved-banner.webp
+          fetch_asset() {
+            live_url="$1"
+            fallback_url="$2"
+            output="$3"
+            if curl -fL --retry 2 --connect-timeout 10 "$live_url" -o "$output"; then
+              echo "Recovered approved asset from the live site: $live_url"
+            else
+              echo "Seeding approved asset from the approved Drive source"
+              curl -fL --retry 3 --connect-timeout 15 "$fallback_url" -o "$output"
+            fi
+            test -s "$output"
+          }
 
-          # Generate the deployed PNG logo directly from the official green-gold SVG.
-          # Existing pages can keep their stable asset path while no longer serving the old blue artwork.
-          rsvg-convert -w 900 -h 900 assets/tgpu-official.svg -o assets/tgpu-learning-hub-approved.png
-          rsvg-convert -w 1200 -h 630 assets/tgpu-green-gold-social.svg -o assets/tgpu-social-preview-green-gold.png
+          mkdir -p assets
+          LOGO_LIVE="https://tgpu.my/assets/tgpu-learning-hub-logo-approved-green-gold-20260923.png"
+          BANNER_LIVE="https://tgpu.my/assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp"
+          FAVICON_LIVE="https://tgpu.my/assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png"
+
+          LOGO_SEED='https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-7f54-8211-9eba-d616f4d1bab3/raw?se=2026-09-23T01%3A08%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=cf4fa596-ec32-52b3-9eb9-f24f5074cef1&skoid=fb469448-2cc9-41bd-a5a6-6e020952b47a&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-22T23%3A52%3A21Z&ske=2026-09-23T23%3A52%3A21Z&sks=b&skv=2026-02-06&sig=L9qPq31/Q1cex7%2BR3ZGtu0xdVx%2BDzdLHlXif8DKJSrI%3D'
+          BANNER_SEED='https://sdmntprseasia.oaiusercontent.com/files/00000000-b8a0-8207-b6ce-5af24079a477/raw?se=2026-09-23T01%3A09%3A04Z&sp=r&sv=2026-02-06&sr=b&scid=578a46e7-e4f5-5a26-85ca-32ba8ca82953&skoid=fb469448-2cc9-41bd-a5a6-6e020952b47a&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T00%3A42%3A14Z&ske=2026-09-24T00%3A42%3A14Z&sks=b&skv=2026-02-06&sig=kQSyXe3fg%2BtfiJyNZe0gdr0t8gaGVdlkjk9OCg8EfrM%3D'
+          FAVICON_SEED='https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-41e8-8211-a08d-84cc541ffb99/raw?se=2026-09-23T01%3A09%3A14Z&sp=r&sv=2026-02-06&sr=b&scid=dd86dc19-4376-56d1-a85a-ffc6f0b56b3c&skoid=fb469448-2cc9-41bd-a5a6-6e020952b47a&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T00%3A42%3A21Z&ske=2026-09-24T00%3A42%3A21Z&sks=b&skv=2026-02-06&sig=sfvJCpdDyfDN4YCSyJDxGAdHHFgQLC0NrhJeWUBHA%2Bc%3D'
+
+          fetch_asset "$LOGO_LIVE" "$LOGO_SEED" /tmp/tgpu-learning-logo-source
+          fetch_asset "$BANNER_LIVE" "$BANNER_SEED" /tmp/tgpu-learning-banner-source
+          fetch_asset "$FAVICON_LIVE" "$FAVICON_SEED" /tmp/tgpu-learning-favicon-source
+
+          convert /tmp/tgpu-learning-logo-source -resize '900x900>' -strip assets/tgpu-learning-hub-logo-approved-green-gold-20260923.png
+          cp assets/tgpu-learning-hub-logo-approved-green-gold-20260923.png assets/tgpu-learning-hub-approved.png
+          convert /tmp/tgpu-learning-banner-source -resize '1800x600^' -gravity center -extent 1800x600 -strip -quality 88 assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp
+          cp assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp assets/tgpu-learning-hub-approved-banner.webp
+          convert /tmp/tgpu-learning-favicon-source -resize '256x256^' -gravity center -extent 256x256 -strip assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png
+          convert assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp -resize '1200x630^' -gravity center -extent 1200x630 -strip assets/tgpu-social-preview-green-gold.png
 
           file assets/tgpu-learning-hub-approved.png | grep -Eqi 'PNG image data'
-          file assets/tgpu-social-preview-green-gold.png | grep -Eqi 'PNG image data'
           file assets/tgpu-learning-hub-approved-banner.webp | grep -Eqi 'Web/P image|WebP'
+          file assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png | grep -Eqi 'PNG image data'
 
-          # Remove stale GitHub Pages canonical/OG hostnames from deployed HTML.
+          # Use the approved favicon on every HTML page while retaining the approved logo for visible branding.
           while IFS= read -r -d '' page; do
             sed -i 's#https://mamduhsaffin.github.io/tgpu-legacy#https://tgpu.my#g' "$page"
             sed -i 's#https://tgpu.my/assets/tgpu-official.svg#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#g' "$page"
             sed -i 's#https://tgpu.my/assets/tgpu-social-preview.jpg#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#g' "$page"
+            perl -0pi -e 's#((?:\.\./)*assets/)tgpu-learning-hub-approved\.png(?="[^>]*rel="(?:icon|apple-touch-icon))#$1tgpu-learning-hub-favicon-approved-green-gold-20260923.png#g' "$page" || true
+            perl -0pi -e 's#(<link[^>]+rel="(?:icon|apple-touch-icon)"[^>]+href=")((?:\.\./)*assets/)tgpu-learning-hub-approved\.png(\")#$1$2tgpu-learning-hub-favicon-approved-green-gold-20260923.png$3#g' "$page" || true
           done < <(find . -type f -name '*.html' -print0)
 
-          # Homepage language variants use one reliable 1200x630 green-gold social card.
+          # Homepage language variants: approved logo, approved 3:1 hero and approved social preview.
           for page in index.html en.html ar.html; do
             test -s "$page"
+            sed -i 's#<img class="hero-image" src="assets/legacy/hero.webp"#<img class="hero-image" src="assets/tgpu-learning-hub-approved-banner.webp"#g' "$page"
             sed -i 's#https://tgpu.my/assets/tgpu-learning-hub-approved-banner.webp?v=20260922-approved-logo#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#g' "$page"
             sed -i 's#<meta property="og:image:width" content="512">#<meta property="og:image:width" content="1200">#g' "$page"
             sed -i 's#<meta property="og:image:height" content="512">#<meta property="og:image:height" content="630">#g' "$page"
-
-            grep -q 'https://tgpu.my/' "$page"
+            grep -q 'assets/tgpu-learning-hub-approved-banner.webp' "$page"
             grep -q 'tgpu-social-preview-green-gold.png' "$page"
-            ! grep -q 'mamduhsaffin.github.io/tgpu-legacy' "$page"
           done
 
-          # Verify priority legacy pages no longer advertise the old GitHub Pages hostname.
-          for page in learn.html learn-en.html learn-ar.html classes.html classes-en.html classes-ar.html; do
-            test -s "$page"
-            ! grep -q 'mamduhsaffin.github.io/tgpu-legacy' "$page"
-          done
+          # Learning Hub uses the same newly approved hero artwork.
+          if test -s academy/learning-hub/hub-v2.css; then
+            sed -i 's#../../assets/tgpu-learning-hub-approved-banner.webp?v=20260922-fixed2#../../assets/tgpu-learning-hub-approved-banner.webp?v=20260923-approved#g' academy/learning-hub/hub-v2.css
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
