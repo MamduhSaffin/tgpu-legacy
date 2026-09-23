@@ -28,75 +28,77 @@ jobs:
       - name: Prepare approved green-gold branding and social sharing
         run: |
           set -euo pipefail
+
+          # Recover from the already-published stable path on future runs.
+          # On this seeding run only, fall back to the freshly authorized approved Drive source.
+          HERO_LIVE='https://tgpu.my/assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp'
+          FAVICON_LIVE='https://tgpu.my/assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png'
+          HERO_SEED='https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-7bb0-8211-9597-227edb70b842/raw?se=2026-09-23T01%3A35%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=9a2d4601-b87a-5236-b336-65258d72af8f&skoid=fb469448-2cc9-41bd-a5a6-6e020952b47a&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T00%3A42%3A18Z&ske=2026-09-24T00%3A42%3A18Z&sks=b&skv=2026-02-06&sig=roWnV42qo0g/jRB2Wrvkm/I96XxWXAP/lc3djGp0uDc%3D'
+          FAVICON_SEED='https://sdmntprindiasocentral.oaiusercontent.com/files/00000000-e248-8211-b8d9-d4105f393233/raw?se=2026-09-23T01%3A36%3A09Z&sp=r&sv=2026-02-06&sr=b&scid=a463a9a2-1f7b-55f7-874c-67b9dfad89f5&skoid=fb469448-2cc9-41bd-a5a6-6e020952b47a&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-22T23%3A32%3A07Z&ske=2026-09-23T23%3A32%3A07Z&sks=b&skv=2026-02-06&sig=epULZMnmMliQ3NeRZ4W%2BkGVdFNC6htDfyeOZWOinvdc%3D'
+
+          if ! curl -fL --retry 1 --connect-timeout 8 "$HERO_LIVE" -o /tmp/approved-legacy-hero; then
+            curl -fL --retry 2 --connect-timeout 12 "$HERO_SEED" -o /tmp/approved-legacy-hero
+          fi
+          if ! curl -fL --retry 1 --connect-timeout 8 "$FAVICON_LIVE" -o /tmp/approved-legacy-favicon; then
+            curl -fL --retry 2 --connect-timeout 12 "$FAVICON_SEED" -o /tmp/approved-legacy-favicon
+          fi
+          test -s /tmp/approved-legacy-hero
+          test -s /tmp/approved-legacy-favicon
+          test -s assets/tgpu-learning-hub-approved.png
+          test -s assets/legacy/hero.webp
+
           sudo apt-get update
           sudo apt-get install -y imagemagick
 
-          # Use the approved green-and-gold assets already committed to this repository.
-          # No temporary Drive links or live-site recovery are used here.
-          test -s assets/tgpu-learning-hub-approved.png
-          test -s assets/tgpu-learning-hub-approved-banner.webp
-          test -s assets/legacy/hero.webp
-
-          # Dedicated green/gold favicon derived from the approved logo.
-          convert assets/tgpu-learning-hub-approved.png \
-            -resize '256x256>' -background '#fffdf8' -gravity center -extent 256x256 -strip \
+          # Persist exact approved assets into the deployed site.
+          convert /tmp/approved-legacy-hero -resize '1800x600^' -gravity center -extent 1800x600 -strip -quality 88 \
+            assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp
+          cp assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp assets/tgpu-learning-hub-approved-banner.webp
+          convert /tmp/approved-legacy-favicon -resize '256x256^' -gravity center -extent 256x256 -strip \
             assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png
-
-          # Social card: keep the full approved 3:1 banner visible inside a 1200x630 card.
-          convert assets/tgpu-learning-hub-approved-banner.webp \
+          convert assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp \
             -resize '1200x630>' -background '#123b2c' -gravity center -extent 1200x630 -strip \
             assets/tgpu-learning-hub-social-preview-green-gold-20260923.png
 
+          file assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp | grep -Eqi 'Web/P image|WebP'
           file assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png | grep -Eqi 'PNG image data'
           file assets/tgpu-learning-hub-social-preview-green-gold-20260923.png | grep -Eqi 'PNG image data'
 
-          # Standardize favicons and known old social-preview URLs site-wide.
           while IFS= read -r -d '' page; do
             sed -i 's#https://mamduhsaffin.github.io/tgpu-legacy#https://tgpu.my#g' "$page"
-            sed -i 's#https://tgpu.my/assets/tgpu-official.svg#https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png#g' "$page"
-            sed -i 's#https://tgpu.my/assets/tgpu-social-preview.jpg#https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png#g' "$page"
-            sed -i 's#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png#g' "$page"
-            perl -0pi -e 's#(<link[^>]+rel="(?:icon|apple-touch-icon)"[^>]+href=")((?:\.\./)*assets/)[^"]+(\")#$1$2tgpu-learning-hub-favicon-approved-green-gold-20260923.png$3#g' "$page" || true
+            sed -i 's#https://tgpu.my/assets/tgpu-official.svg#https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png?v=20260923-social3#g' "$page"
+            sed -i 's#https://tgpu.my/assets/tgpu-social-preview.jpg#https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png?v=20260923-social3#g' "$page"
+            sed -i 's#https://tgpu.my/assets/tgpu-social-preview-green-gold.png#https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png?v=20260923-social3#g' "$page"
           done < <(find . -type f -name '*.html' -print0)
 
-          # Root homepage variants: approved banner is a clean standalone strip.
-          # Preserve the original TGPU Legacy hero and its own text underneath.
           python3 <<'PY'
           from pathlib import Path
           import re
-
-          banner = '<section class="approved-brand-banner" aria-label="TGPU approved green and gold banner"><img src="assets/tgpu-learning-hub-approved-banner.webp?v=20260923-clean2" width="1800" height="600" alt="TGPU Learning Hub — Knowledge, values and lifelong learning" fetchpriority="high" decoding="async"></section>'
+          banner = '<section class="approved-brand-banner" aria-label="TGPU approved green and gold banner"><img src="assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp?v=20260923-visible3" width="1800" height="600" alt="TGPU Learning Hub — Knowledge, values and lifelong learning" fetchpriority="high" decoding="async"></section>'
           style = '<style id="approved-brand-banner-style">.approved-brand-banner{background:#fff;padding:12px 0 18px}.approved-brand-banner img{display:block;width:min(1600px,calc(100% - 24px));height:auto;aspect-ratio:3/1;object-fit:cover;margin:auto;border-radius:20px;box-shadow:0 14px 34px rgba(7,40,28,.12)}@media(max-width:640px){.approved-brand-banner{padding:8px 0 12px}.approved-brand-banner img{width:calc(100% - 12px);border-radius:14px}}</style>'
-          social = 'https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png?v=20260923-social2'
-          favicon = 'assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png?v=20260923-favicon2'
-
-          for filename in ['index.html', 'en.html', 'ar.html']:
-              p = Path(filename)
-              s = p.read_text(encoding='utf-8')
-              # Restore the original Legacy hero if an earlier deployment substituted the Learning Hub banner.
-              s = s.replace('<img class="hero-image" src="assets/tgpu-learning-hub-approved-banner.webp"', '<img class="hero-image" src="assets/legacy/hero.webp"')
-              s = re.sub(r'<section class="approved-brand-banner".*?</section>', '', s, flags=re.S)
-              if '<main id="main">' in s:
-                  s = s.replace('<main id="main">', '<main id="main">\n' + banner, 1)
-              if 'approved-brand-banner-style' not in s:
-                  s = s.replace('</head>', style + '</head>', 1)
-              s = re.sub(r'(<meta property="og:image" content=")[^"]+("[^>]*>)', r'\1' + social + r'\2', s, count=1)
-              s = re.sub(r'(<meta name="twitter:image" content=")[^"]+("[^>]*>)', r'\1' + social + r'\2', s, count=1)
-              s = re.sub(r'(<meta property="og:image:width" content=")[^"]+("[^>]*>)', r'\g<1>1200\2', s, count=1)
-              s = re.sub(r'(<meta property="og:image:height" content=")[^"]+("[^>]*>)', r'\g<1>630\2', s, count=1)
-              s = re.sub(r'(<link rel="icon"[^>]+href=")[^"]+("[^>]*>)', r'\1' + favicon + r'\2', s, count=1)
-              s = re.sub(r'(<link rel="apple-touch-icon"[^>]+href=")[^"]+("[^>]*>)', r'\1' + favicon + r'\2', s, count=1)
-              p.write_text(s, encoding='utf-8')
+          social = 'https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png?v=20260923-social3'
+          favicon = 'assets/tgpu-learning-hub-favicon-approved-green-gold-20260923.png?v=20260923-favicon3'
+          for filename in ['index.html','en.html','ar.html']:
+              p=Path(filename); s=p.read_text(encoding='utf-8')
+              s=s.replace('<img class="hero-image" src="assets/tgpu-learning-hub-approved-banner.webp"','<img class="hero-image" src="assets/legacy/hero.webp"')
+              s=re.sub(r'<section class="approved-brand-banner".*?</section>','',s,flags=re.S)
+              s=s.replace('<main id="main">','<main id="main">\n'+banner,1)
+              if 'approved-brand-banner-style' not in s: s=s.replace('</head>',style+'</head>',1)
+              s=re.sub(r'(<meta property="og:image" content=")[^"]+("[^>]*>)',r'\1'+social+r'\2',s,count=1)
+              s=re.sub(r'(<meta name="twitter:image" content=")[^"]+("[^>]*>)',r'\1'+social+r'\2',s,count=1)
+              s=re.sub(r'(<meta property="og:image:width" content=")[^"]+("[^>]*>)',r'\g<1>1200\2',s,count=1)
+              s=re.sub(r'(<meta property="og:image:height" content=")[^"]+("[^>]*>)',r'\g<1>630\2',s,count=1)
+              s=re.sub(r'(<link rel="icon"[^>]+href=")[^"]+("[^>]*>)',r'\1'+favicon+r'\2',s,count=1)
+              s=re.sub(r'(<link rel="apple-touch-icon"[^>]+href=")[^"]+("[^>]*>)',r'\1'+favicon+r'\2',s,count=1)
+              p.write_text(s,encoding='utf-8')
           PY
 
-          # The actual Learning Hub page continues to use the approved Learning Hub banner.
           if test -s academy/learning-hub/hub-v2.css; then
-            sed -i 's#../../assets/tgpu-learning-hub-approved-banner.webp?v=20260922-fixed2#../../assets/tgpu-learning-hub-approved-banner.webp?v=20260923-approved#g' academy/learning-hub/hub-v2.css
+            sed -i 's#../../assets/tgpu-learning-hub-approved-banner.webp?v=[^"'"')]*#../../assets/tgpu-learning-hub-hero-approved-green-gold-20260923.webp?v=20260923-approved#g' academy/learning-hub/hub-v2.css || true
           fi
 
-          # Guardrails against the previous messy deployment.
           grep -q 'assets/legacy/hero.webp' index.html
-          grep -q '<section class="approved-brand-banner"' index.html
+          grep -q 'approved-brand-banner' index.html
           grep -q 'tgpu-learning-hub-social-preview-green-gold-20260923.png' index.html
           grep -q 'tgpu-learning-hub-favicon-approved-green-gold-20260923.png' index.html
 
