@@ -15,34 +15,38 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Keep official TGPU artwork only
+      - name: Sync exact approved logo and remove rejected artwork
         run: |
           set -euo pipefail
-          test -s assets/tgpu-official.svg
-          sudo apt-get update
-          sudo apt-get install -y imagemagick
-          convert -background '#fffdf8' assets/tgpu-official.svg -resize '1000x500>' -gravity center -extent 1200x630 -strip assets/tgpu-official-logo-social.png
+          curl -fL --retry 3 'https://sdmntprcentralindia.oaiusercontent.com/files/00000000-23ac-8208-83d9-58e4ec3abc0a/raw?se=2026-09-23T04%3A36%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=d9e0e592-a1d8-5e50-8aea-a74faa24e27f&skoid=fb469448-2cc9-41bd-a5a6-6e020952b47a&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T02%3A55%3A37Z&ske=2026-09-24T02%3A55%3A37Z&sks=b&skv=2026-02-06&sig=xn9FfgS2Jd/pTsrDQQ1mkqWl41lMc3sZ/CpYdoDSw/s%3D' -o assets/tgpu-learning-hub-approved.png
+          test -s assets/tgpu-learning-hub-approved.png
           python3 <<'PY'
           from pathlib import Path
           import re
 
-          social = 'https://tgpu.my/assets/tgpu-official-logo-social.png?v=20260923-approved-logo-only'
+          social = 'https://tgpu.my/assets/tgpu-learning-hub-approved.png?v=20260923-approved-drive-logo'
           for p in Path('.').rglob('*.html'):
               s = p.read_text(encoding='utf-8')
-              s = re.sub(r'https://(?:tgpu\.my|mamduhsaffin\.github\.io/tgpu-legacy)/assets/(?:tgpu-social-preview\.jpg|tgpu-social-approved-green-gold\.png)(?:\?[^"\']*)?', social, s)
-              s = re.sub(r'(<meta property="og:image" content=")[^"]*tgpu-social-preview\.jpg[^"]*(")', r'\1' + social + r'\2', s)
-              s = re.sub(r'(<meta name="twitter:image" content=")[^"]*tgpu-social-preview\.jpg[^"]*(")', r'\1' + social + r'\2', s)
-              s = re.sub(r'(<meta property="og:image:width" content=")[^"]+("[^>]*>)', r'\g<1>1200\2', s)
-              s = re.sub(r'(<meta property="og:image:height" content=")[^"]+("[^>]*>)', r'\g<1>630\2', s)
+              if re.search(r'<meta property="og:image"[^>]*>', s):
+                  s = re.sub(r'<meta property="og:image"[^>]*>', f'<meta property="og:image" content="{social}">', s, count=1)
+              if re.search(r'<meta name="twitter:image"[^>]*>', s):
+                  s = re.sub(r'<meta name="twitter:image"[^>]*>', f'<meta name="twitter:image" content="{social}">', s, count=1)
+              s = re.sub(r'<meta property="og:image:type"[^>]*>\s*', '<meta property="og:image:type" content="image/png">\n', s)
+              s = re.sub(r'<meta property="og:image:width"[^>]*>\s*', '', s)
+              s = re.sub(r'<meta property="og:image:height"[^>]*>\s*', '', s)
               if p.name in {'index.html', 'en.html', 'ar.html'} and p.parent == Path('.'):
                   s = re.sub(r'<link rel="preload" as="image" href="assets/legacy/hero\.webp">', '', s)
                   s = re.sub(r'<img class="hero-image"[^>]*src="assets/legacy/hero\.webp"[^>]*>', '', s)
               p.write_text(s, encoding='utf-8')
-
-          deploy = Path('.github/workflows/deploy-approved-learning-banner.yml')
-          deploy.write_text('''name: Deploy TGPU Legacy to GitHub Pages\n\non:\n  push:\n    branches:\n      - main\n  workflow_dispatch:\n\npermissions:\n  contents: read\n  pages: write\n  id-token: write\n\nconcurrency:\n  group: tgpu-legacy-pages\n  cancel-in-progress: true\n\njobs:\n  deploy:\n    environment:\n      name: github-pages\n      url: ${{ steps.deployment.outputs.page_url }}\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v4\n      - name: Configure Pages\n        uses: actions/configure-pages@v5\n      - name: Upload site\n        uses: actions/upload-pages-artifact@v3\n        with:\n          path: .\n      - name: Deploy\n        id: deployment\n        uses: actions/deploy-pages@v4\n''', encoding='utf-8')
           PY
-          git rm -f --ignore-unmatch assets/legacy/hero.webp assets/tgpu-social-preview.jpg assets/tgpu-green-gold-social.svg assets/tgpu-social-approved-green-gold.png
+          git rm -f --ignore-unmatch \
+            assets/legacy/hero.webp \
+            assets/tgpu-social-preview.jpg \
+            assets/tgpu-green-gold-social.svg \
+            assets/tgpu-social-approved-green-gold.png \
+            assets/tgpu-official-logo-social.png \
+            assets/tgpu-learning-hub-approved-banner.webp \
+            assets/tgpu-learning-hub-share-v2.jpg
       - name: Commit cleanup
         run: |
           git config user.name 'github-actions[bot]'
@@ -52,5 +56,5 @@ jobs:
             echo 'No changes needed.'
             exit 0
           fi
-          git commit -m 'Remove unapproved TGPU Legacy artwork and keep official logo only'
+          git commit -m 'Remove rejected TGPU Legacy pictures and use approved Drive logo only'
           git push origin HEAD:main
