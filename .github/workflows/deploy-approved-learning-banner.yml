@@ -25,36 +25,77 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify permanent approved branding
+      - name: Enforce approved green-gold branding only
         run: |
           set -euo pipefail
 
-          # Permanent approved assets only: no expiring Drive URLs and no image conversion.
-          test -s assets/tgpu-learning-hub-approved.png
+          # Permanent green-and-gold source assets. No blue/legacy logo fallback.
+          test -s assets/tgpu-official.svg
+          test -s assets/tgpu-icon.svg
+          test -s assets/tgpu-green-gold-social.svg
           test -s assets/legacy/hero.webp
+
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+          # Browser-safe raster derivatives from the permanent approved green/gold artwork.
+          convert -background '#fffdf8' assets/tgpu-icon.svg -resize 256x256 -gravity center -extent 256x256 -strip \
+            assets/tgpu-favicon-approved-green-gold.png
+          convert -background '#fffdf8' assets/tgpu-green-gold-social.svg -resize 1200x630! -strip \
+            assets/tgpu-social-approved-green-gold.png
+
+          file assets/tgpu-favicon-approved-green-gold.png | grep -Eqi 'PNG image data'
+          file assets/tgpu-social-approved-green-gold.png | grep -Eqi 'PNG image data'
 
           python3 <<'PY'
           from pathlib import Path
+          import re
 
-          approved = 'https://tgpu.my/assets/tgpu-learning-hub-approved.png'
-          old_urls = {
-              'https://tgpu.my/assets/tgpu-official.svg',
-              'https://tgpu.my/assets/tgpu-social-preview.jpg',
-              'https://tgpu.my/assets/tgpu-social-preview-green-gold.png',
-              'https://tgpu.my/assets/tgpu-learning-hub-social-preview-green-gold-20260923.png',
-          }
+          logo_rel = 'assets/tgpu-official.svg'
+          logo_abs = 'https://tgpu.my/assets/tgpu-official.svg'
+          favicon_rel = 'assets/tgpu-favicon-approved-green-gold.png?v=20260923-green-gold'
+          social_abs = 'https://tgpu.my/assets/tgpu-social-approved-green-gold.png?v=20260923-green-gold'
 
-          for p in Path('.').rglob('*.html'):
+          # Remove old/blue logo references from deployed HTML and JavaScript.
+          for p in list(Path('.').rglob('*.html')) + list(Path('.').rglob('*.js')):
               s = p.read_text(encoding='utf-8')
               s = s.replace('https://mamduhsaffin.github.io/tgpu-legacy', 'https://tgpu.my')
-              for old in old_urls:
-                  s = s.replace(old, approved)
+              s = s.replace('https://tgpu.my/assets/tgpu-learning-hub-approved.png', logo_abs)
+              s = s.replace('tgpu-learning-hub-approved.png', 'tgpu-official.svg')
+              s = s.replace('tgpu-logo.png', 'tgpu-official.svg')
+              # site-original.js updates favicon dynamically; keep that separate from the visible logo.
+              s = s.replace("link.href = 'assets/tgpu-official.svg';", "link.href = 'assets/tgpu-favicon-approved-green-gold.png?v=20260923-green-gold';")
+              p.write_text(s, encoding='utf-8')
+
+          # Root Legacy pages: approved logo, dedicated favicon and green/gold 1200x630 social preview.
+          for filename in ['index.html', 'en.html', 'ar.html']:
+              p = Path(filename)
+              s = p.read_text(encoding='utf-8')
+              s = re.sub(r'(<meta property="og:image" content=")[^"]+("[^>]*>)', r'\1' + social_abs + r'\2', s, count=1)
+              s = re.sub(r'(<meta name="twitter:image" content=")[^"]+("[^>]*>)', r'\1' + social_abs + r'\2', s, count=1)
+              s = re.sub(r'(<meta property="og:image:width" content=")[^"]+("[^>]*>)', r'\g<1>1200\2', s, count=1)
+              s = re.sub(r'(<meta property="og:image:height" content=")[^"]+("[^>]*>)', r'\g<1>630\2', s, count=1)
+
+              if re.search(r'<link rel="icon"[^>]*>', s):
+                  s = re.sub(r'<link rel="icon"[^>]*>', f'<link rel="icon" type="image/png" href="{favicon_rel}">', s, count=1)
+              else:
+                  s = s.replace('</head>', f'<link rel="icon" type="image/png" href="{favicon_rel}"></head>', 1)
+
+              if re.search(r'<link rel="apple-touch-icon"[^>]*>', s):
+                  s = re.sub(r'<link rel="apple-touch-icon"[^>]*>', f'<link rel="apple-touch-icon" href="{favicon_rel}">', s, count=1)
+
               p.write_text(s, encoding='utf-8')
           PY
 
-          # Guardrails: approved green/gold logo stays visible and the original Legacy hero remains intact.
-          grep -q 'assets/tgpu-learning-hub-approved.png' index.html
+          # Guardrails: the live Legacy package must contain no old approved-PNG/blue-logo reference.
+          grep -q 'assets/tgpu-official.svg' index.html
+          grep -q 'assets/tgpu-official.svg' assets/legacy/site-original.js
+          grep -q 'assets/tgpu-favicon-approved-green-gold.png' index.html
+          grep -q 'tgpu-social-approved-green-gold.png' index.html
           grep -q 'assets/legacy/hero.webp' index.html
+          ! grep -q 'tgpu-learning-hub-approved.png' index.html
+          ! grep -q 'tgpu-learning-hub-approved.png' assets/legacy/site-original.js
+          ! grep -q 'tgpu-logo.png' index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
