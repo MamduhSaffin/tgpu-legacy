@@ -139,7 +139,12 @@
         cards: [
           ['TGPU Legacy', 'Warisan Tok Guru Pulau Ubi, keluarga dan khidmat masyarakat.', 'index.html', 'WARISAN'],
           ['TGPU Academy', 'Al-Quran, bahasa Arab, pendidikan Islam dan sumber pembelajaran.', 'academy/', 'PENDIDIKAN'],
-          ['TGPU Naturals', 'Inisiatif produk kesejahteraan semula jadi keluarga TGPU.', 'wellness/?lang=ms', 'KESEJAHTERAAN'],
+          ['TGPU Wellness', 'Inisiatif produk kesejahteraan semula jadi keluarga TGPU.', 'https://wellness.tgpu.my/', 'KESEJAHTERAAN'],
+          ['SATU by TGPU', 'Pembantu digital ringkas untuk nota, kiraan dan kandungan jualan mikro.', 'https://satu.tgpu.my/', 'DIGITAL'],
+          ['TGPU Watch', 'Pengalaman penemuan hiburan Asia yang ringkas dan mesra mudah alih.', 'https://watch.tgpu.my/', 'DIGITAL'],
+          ['TGPU Iqra', 'Pengalaman pembelajaran Iqra digital yang mudah diakses.', 'https://iqra.tgpu.my/', 'PENDIDIKAN DIGITAL'],
+          ['TEMAN Haramain', 'Inisiatif digital untuk membantu pengalaman jemaah Umrah dan Haji.', 'https://teman.tgpu.my/', 'DIGITAL'],
+          ['Muthabbit', 'Inisiatif digital TGPU untuk pembelajaran dan pengukuhan ilmu.', 'https://muthabbit.tgpu.my/', 'DIGITAL'],
           ['TGPU Gulf Advisory & Trade', 'Malaysia ↔ Saudi/GCC untuk kemasukan pasaran, sourcing, pemadanan pembeli-pembekal, fasilitasi perdagangan dan pembangunan perniagaan.', 'gulf/ms.html', 'PERNIAGAAN'],
           ['GCC Market Entry', 'Panduan dan sumber praktikal untuk syarikat yang meneroka pasaran Saudi dan GCC.', 'https://gccmarketentry.me/', 'SUMBER']
         ]
@@ -152,7 +157,12 @@
         cards: [
           ['TGPU Legacy', 'The Tok Guru Pulau Ubi family legacy, community and wider TGPU story.', 'en.html', 'LEGACY'],
           ['TGPU Academy', 'Quran, Arabic, Islamic learning and educational resources.', 'academy/en.html', 'EDUCATION'],
-          ['TGPU Naturals', 'The TGPU family’s natural-wellness product initiative.', 'wellness/?lang=en', 'WELLNESS'],
+          ['TGPU Wellness', 'The TGPU family’s natural-wellness product initiative.', 'https://wellness.tgpu.my/', 'WELLNESS'],
+          ['SATU by TGPU', 'A lightweight digital assistant for notes, calculations and micro-seller content.', 'https://satu.tgpu.my/', 'DIGITAL'],
+          ['TGPU Watch', 'A clean, mobile-friendly Asian entertainment discovery experience.', 'https://watch.tgpu.my/', 'DIGITAL'],
+          ['TGPU Iqra', 'An accessible digital Iqra learning experience.', 'https://iqra.tgpu.my/', 'DIGITAL EDUCATION'],
+          ['TEMAN Haramain', 'A digital initiative supporting the Umrah and Hajj pilgrim experience.', 'https://teman.tgpu.my/', 'DIGITAL'],
+          ['Muthabbit', 'A TGPU digital initiative for learning and knowledge reinforcement.', 'https://muthabbit.tgpu.my/', 'DIGITAL'],
           ['TGPU Gulf Advisory & Trade', 'Malaysia ↔ Saudi/GCC market entry, buyer-supplier sourcing, trade facilitation and cross-border business development.', 'gulf/', 'BUSINESS'],
           ['GCC Market Entry', 'Practical guides and resources for companies exploring Saudi and GCC markets.', 'https://gccmarketentry.me/', 'RESOURCE']
         ]
@@ -165,7 +175,12 @@
         cards: [
           ['TGPU Legacy', 'إرث Tok Guru Pulau Ubi والعائلة وخدمة المجتمع.', 'ar.html', 'الإرث'],
           ['TGPU Academy', 'القرآن واللغة العربية والتربية الإسلامية والموارد التعليمية.', 'academy/ar.html', 'التعليم'],
-          ['TGPU Naturals', 'مبادرة عائلية لمنتجات العافية الطبيعية.', 'wellness/?lang=ar', 'العافية'],
+          ['TGPU Wellness', 'مبادرة عائلية لمنتجات العافية الطبيعية.', 'https://wellness.tgpu.my/', 'العافية'],
+          ['SATU by TGPU', 'مساعد رقمي مبسط للملاحظات والحسابات ومحتوى البائعين الصغار.', 'https://satu.tgpu.my/', 'رقمي'],
+          ['TGPU Watch', 'تجربة مبسطة ومتوافقة مع الهاتف لاكتشاف الترفيه الآسيوي.', 'https://watch.tgpu.my/', 'رقمي'],
+          ['TGPU Iqra', 'تجربة رقمية ميسرة لتعلم إقرأ.', 'https://iqra.tgpu.my/', 'تعليم رقمي'],
+          ['TEMAN Haramain', 'مبادرة رقمية لدعم تجربة المعتمرين والحجاج.', 'https://teman.tgpu.my/', 'رقمي'],
+          ['Muthabbit', 'مبادرة رقمية من TGPU للتعلم وتثبيت المعرفة.', 'https://muthabbit.tgpu.my/', 'رقمي'],
           ['TGPU Gulf Advisory & Trade', 'استشارات وتسهيل التجارة بين ماليزيا والسعودية والخليج، بما يشمل دخول السوق وربط المشترين بالموردين وتطوير الأعمال.', 'gulf/ar.html', 'الأعمال'],
           ['GCC Market Entry', 'أدلة وموارد عملية للشركات التي تستكشف السوق السعودي وأسواق الخليج.', 'https://gccmarketentry.me/', 'المعرفة']
         ]
