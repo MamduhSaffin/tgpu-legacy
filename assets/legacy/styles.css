@@ -27,3 +27,10 @@ html[lang="ar"]{--serif:'Noto Naskh Arabic',Georgia,serif;--sans:'Noto Naskh Ara
 .tgpu-official-emblem{width:62px;height:62px;flex:0 0 62px;object-fit:contain;object-position:center;border-radius:0;background:transparent;box-shadow:none}
 .footer-brand .tgpu-official-emblem{width:68px;height:68px;flex-basis:68px}
 @media(max-width:700px){.site-header .tgpu-official-emblem{width:52px;height:52px;flex-basis:52px}.footer-brand .tgpu-official-emblem{width:58px;height:58px;flex-basis:58px}}
+
+/* Digital ecosystem shared multilingual and mobile accessibility, 2026-10-23 */
+:where(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #b79150;outline-offset:3px}
+:where(button,a,[role='button']){touch-action:manipulation}
+img,video,iframe{max-width:100%}
+html[dir='rtl'] bdi,html[dir='rtl'] [href^='mailto:']{unicode-bidi:isolate}
+@media(max-width:700px){.hero-actions .button{min-height:44px}.site-header a,.site-header button{min-height:44px}.footer-bottom a{overflow-wrap:anywhere}}
