@@ -34,3 +34,14 @@ html[lang="ar"]{--serif:'Noto Naskh Arabic',Georgia,serif;--sans:'Noto Naskh Ara
 img,video,iframe{max-width:100%}
 html[dir='rtl'] bdi,html[dir='rtl'] [href^='mailto:']{unicode-bidi:isolate}
 @media(max-width:700px){.hero-actions .button{min-height:44px}.site-header a,.site-header button{min-height:44px}.footer-bottom a{overflow-wrap:anywhere}}
+
+
+/* TGPU ecosystem footer refinement — reversible, multilingual */
+.footer-nav a{display:inline-flex;align-items:center;min-height:36px;line-height:1.45;text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
+.footer-contact a{overflow-wrap:anywhere}
+.footer-nav a:focus-visible,.footer-contact a:focus-visible{outline:3px solid #e0bc76;outline-offset:4px;border-radius:3px}
+.footer-main{min-width:0}
+.footer-main>div,.footer-main>.footer-quote{min-width:0}
+@media(max-width:1000px){.footer-nav>div{column-gap:18px;row-gap:5px}}
+@media(max-width:700px){.footer-nav a{min-height:44px;padding-block:5px;justify-content:center}.footer-nav>div{max-width:360px;column-gap:12px;row-gap:2px}.footer-contact a{min-height:44px}.footer-tag{white-space:normal}}
+@media(max-width:360px){.footer-nav>div{grid-template-columns:1fr}}

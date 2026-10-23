@@ -1,0 +1,25 @@
+name: Validate TGPU homepage SEO
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'en.html'
+      - 'ar.html'
+      - 'sitemap.xml'
+      - 'sitemap-community.xml'
+      - 'robots.txt'
+      - '.github/scripts/check-homepage-seo.py'
+      - '.github/workflows/check-homepage-seo.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seo-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check sitemap XML and language/canonical consistency
+        run: python3 .github/scripts/check-homepage-seo.py
