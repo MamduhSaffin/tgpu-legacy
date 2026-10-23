@@ -1,0 +1,59 @@
+name: Verify Digital family homepage
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify multilingual content, family navigation and approved artwork
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import struct
+          from urllib.parse import urlparse
+
+          approved = Path("assets/tgpu-digital-submaster-approved-20261013.png")
+          data = approved.read_bytes()
+          assert data[:8] == b"\x89PNG\r\n\x1a\n", "Approved logo must be PNG"
+          assert len(data) > 50000, "Approved logo is unexpectedly small"
+          width, height = struct.unpack(">II", data[16:24])
+          assert width == height and width >= 512, (width, height)
+
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.tags = []
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  values = dict(attrs)
+                  self.tags.append((tag,values))
+                  if tag == "a" and "href" in values:
+                      self.links.append(values["href"])
+
+          apps = ("iqra", "teman", "academy", "learning", "satu", "khalifah")
+          for name, lang in (("index.html","ms"),("en.html","en"),("ar.html","ar")):
+              source = Path(name).read_text("utf-8")
+              parser = Parser()
+              parser.feed(source)
+              html = next(a for tag,a in parser.tags if tag=="html")
+              assert html["lang"]==lang, name
+              if lang=="ar": assert html.get("dir")=="rtl", name
+              assert source.count('id="explore-tgpu"')==1, name
+              assert source.count('<footer')==1, name
+              assert source.count('tgpu-digital-submaster-approved-20261013.png')>=7, name
+              assert "TGPU Digital Ecosystem" in source, name
+              for app in apps:
+                  assert "https://"+app+".tgpu.my/" in parser.links, (name,app)
+              for url in parser.links:
+                  if url.startswith("http"):
+                      assert urlparse(url).scheme=="https", (name,url)
+              print("PASS",name,lang,"six family apps and approved logo")
+          PY
