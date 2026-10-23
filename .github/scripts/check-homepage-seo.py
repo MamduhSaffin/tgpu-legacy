@@ -49,6 +49,37 @@ def run():
         assert parser.alternates == LANGS, f"{filename}: page hreflang mismatch"
         assert entries.get(canonical) == LANGS, f"{filename}: sitemap hreflang mismatch"
         assert parser.lang == ("ms" if filename == "index.html" else filename[:2]), f"{filename}: language mismatch"
+    # Verify ecosystem footer links in every translated homepage.
+    destinations = (
+        "https://iqra.tgpu.my/",
+        "https://teman.tgpu.my/",
+        "https://tgpugulf.com/",
+    )
+    from html.parser import HTMLParser
+
+    class FooterLinks(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.in_footer = False
+            self.links = {}
+        def handle_starttag(self, tag, attrs):
+            a = dict(attrs)
+            if tag == "footer":
+                self.in_footer = True
+            if tag == "a" and self.in_footer and a.get("href") in destinations:
+                self.links.setdefault(a["href"], []).append(a)
+        def handle_endtag(self, tag):
+            if tag == "footer":
+                self.in_footer = False
+
+    for filename in PAGES:
+        footer = FooterLinks()
+        footer.feed((ROOT / filename).read_text(encoding="utf-8"))
+        for url in destinations:
+            matches = footer.links.get(url, [])
+            assert len(matches) == 1, f"{filename}: expected one footer link to {url}"
+            assert "noopener" in matches[0].get("rel", "").split(), f"{filename}: missing noopener for {url}"
+
     robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
     for name in ("sitemap.xml", "sitemap-community.xml"):
         assert f"Sitemap: {BASE}{name}" in robots, f"robots missing {name}"
