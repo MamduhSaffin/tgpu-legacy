@@ -1,0 +1,60 @@
+name: Verify founder animated portfolio before public release
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'founder/**'
+      - '.github/workflows/verify-founder-portfolio.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'founder/**'
+      - '.github/workflows/verify-founder-portfolio.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse animations and verify portfolio privacy/claims
+        run: |
+          node --check founder/founder.js
+          node --check founder/verify-visual.mjs
+          node --check founder/verify-static.cjs
+          node founder/verify-static.cjs
+  browser:
+    needs: source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install test-only browser dependency
+        run: npm install --no-save --no-audit --no-fund playwright@1.56.1
+      - name: Install supported Chromium on pinned Ubuntu 24.04
+        run: npx playwright install --with-deps chromium
+      - name: Serve source locally without publication
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/tgpu-founder-http.log 2>&1 &
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if curl -fsS http://127.0.0.1:8765/founder/ -o /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/tgpu-founder-http.log
+          exit 1
+      - name: Check motion, interaction, keyboard navigation and 4 responsive sizes
+        run: node founder/verify-visual.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: founder-portfolio-mobile-desktop-qa
+          path: founder-qa-screenshots/
+          retention-days: 5
+          if-no-files-found: ignore
