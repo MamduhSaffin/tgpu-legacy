@@ -1,0 +1,22 @@
+name: Verify Digital company profile and founder links
+on:
+  pull_request:
+    branches: [main]
+    paths: ['company-profile/**','founder/index.html','.github/workflows/verify-digital-profile.yml']
+  push:
+    branches: [main]
+    paths: ['company-profile/**','founder/index.html','.github/workflows/verify-digital-profile.yml']
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node --check company-profile/profile.js
+          node --check company-profile/verify.cjs
+          node company-profile/verify.cjs
