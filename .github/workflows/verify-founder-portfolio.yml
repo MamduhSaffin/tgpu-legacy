@@ -58,3 +58,36 @@ jobs:
           path: founder-qa-screenshots/
           retention-days: 5
           if-no-files-found: ignore
+
+  live:
+    needs: browser
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Verify actual owner-review HTTPS page, animation and downloadable contact
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=https://tgpu.my/founder
+          success=false
+          for attempt in {1..16}; do
+            if curl -fsSL --max-time 18 "$BASE/" -o /tmp/tgpu-founder.html \
+             && curl -fsSL --max-time 18 "$BASE/founder.css" -o /tmp/tgpu-founder.css \
+             && curl -fsSL --max-time 18 "$BASE/founder.js" -o /tmp/tgpu-founder.js \
+             && curl -fsSL --max-time 18 "$BASE/muhammad-mamduh-saffin.vcf" -o /tmp/tgpu-founder.vcf \
+             && grep -Fq 'Muhammad Mamduh Saffin' /tmp/tgpu-founder.html \
+             && grep -Fq 'TGPU Digital Ecosystem' /tmp/tgpu-founder.html \
+             && grep -Fq 'TGPU Gulf Advisory' /tmp/tgpu-founder.html \
+             && grep -Fq 'noindex,follow' /tmp/tgpu-founder.html \
+             && grep -Fq '.orbital-ring' /tmp/tgpu-founder.css \
+             && grep -Fq 'requestAnimationFrame' /tmp/tgpu-founder.js \
+             && grep -Fq 'FN:Muhammad Mamduh Saffin' /tmp/tgpu-founder.vcf; then
+               success=true
+               break
+            fi
+            echo "Waiting for the new TGPU founder preview route, attempt $attempt"
+            sleep 10
+          done
+          test "$success" = true || { echo "::error::Live founder URL not verified; do not announce published."; exit 1; }
+          echo "PASS: TGPU founder owner-preview route, animated assets, privacy noindex and vCard served on real HTTPS"
