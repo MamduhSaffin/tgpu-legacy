@@ -210,3 +210,16 @@ img,svg,canvas{max-width:100%}
  .project-filters{gap:7px}.filter{min-height:44px}.contact{min-height:0}.contact h2{font-size:clamp(2.5rem,11vw,4rem)}.contact-orbit{max-width:100vw}.footer-inner nav{justify-content:center}
 }
 @media(max-width:380px){.container{width:calc(100% - 26px)}.hero h1{font-size:2.18rem}.hero-visual{min-height:0!important}.hero-actions .button{font-size:.88rem}.brand small{font-size:.49rem}}
+
+/* Safety-critical logo sizing: header is compact at every viewport width. */
+.navigation{width:100%;max-width:100%;overflow:visible}
+.nav-inner{height:88px;min-height:88px;max-height:88px;min-width:0}
+.navigation .brand{display:inline-flex!important;flex:0 0 auto;align-items:center;gap:10px;min-width:0;max-width:235px;height:60px;overflow:hidden}
+.navigation .brand img.brand-mark{display:block!important;position:static!important;flex:0 0 44px!important;width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important;max-height:44px!important;object-fit:contain!important;aspect-ratio:1/1!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+.navigation .brand .brand-wordmark{display:flex;flex-direction:column;justify-content:center;flex:0 1 auto;min-width:0;line-height:1.12;overflow:hidden}
+.navigation .brand .brand-wordmark strong{font-size:1.04rem;letter-spacing:.11em;white-space:nowrap}
+.navigation .brand .brand-wordmark small{font-size:.57rem;letter-spacing:.09em;margin-top:3px;white-space:nowrap}
+.nav-inner .main-nav{min-width:0}.navigation .nav-actions{flex:0 0 auto}
+@media(max-width:1130px){.navigation .nav-cta{display:none}}
+@media(max-width:850px){.nav-inner{height:72px;min-height:72px;max-height:72px}.navigation .brand{height:56px;max-width:205px}.navigation .brand img.brand-mark{flex-basis:40px!important;width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;max-height:40px!important}.main-nav{max-height:calc(100dvh - 72px);overflow-y:auto}.nav-actions .nav-toggle{display:block}}
+@media(max-width:380px){.navigation .brand{max-width:190px}.navigation .brand .brand-wordmark strong{font-size:.91rem}}
