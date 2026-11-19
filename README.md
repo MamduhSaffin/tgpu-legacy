@@ -9,10 +9,13 @@ TGPU Legacy is a family legacy platform inspired by the values associated with T
 
 ## Websites
 
-- Main TGPU Legacy website: **https://mamduhsaffin.github.io/tgpu-legacy/**
-- TGPU Naturals: **https://mamduhsaffin.github.io/tgpu-legacy/wellness/**
+- TGPU Legacy corporate and family-heritage homepage: **https://tgpu.my/**
+- TGPU Digital Ecosystem application directory: **https://tgpu.tech/**
+- TGPU Gulf Advisory: **https://tgpugulf.com/**
+- TGPU Wellness companion: **https://wellness.tgpu.my/**
+- The historic TGPU Naturals pages remain in `wellness/` in this repository. The corporate homepage describes the developing Naturals initiative.
 
-Both experiences support Bahasa Melayu, English and Arabic.
+The Legacy homepage supports Bahasa Melayu, English and Arabic.
 
 ## TGPU Legacy Education
 
@@ -61,16 +64,22 @@ WhatsApp: **+60 12-641 3812**
 
 ## Repository Structure
 
-- `index.html` — Bahasa Melayu education homepage
-- `en.html` — English education homepage
-- `ar.html` — Arabic education homepage
+- `index.html`, `en.html`, `ar.html` — Malay, English and Arabic corporate homepages
+- `classes.html`, `classes-en.html`, `classes-ar.html` — classes, teacher information and registration
 - `learn*.html` — education learning hub
 - `wellness/index.html` — TGPU Naturals website
 - `wellness/styles.css` — responsive TGPU Naturals styling
 - `wellness/app.js` — trilingual TGPU Naturals interactions
 - `sitemap.xml` — search-engine sitemap
 
-GitHub Pages publishes from the `main` branch and repository root.
+## Corporate homepage and deployment
+
+The founder’s November 2026 domain structure places TGPU Legacy at `tgpu.my` and the Digital Ecosystem at `tgpu.tech`. Before this change, the Cloudflare Worker `tgpu-ecosystem-web` served the digital master portal at `tgpu.my`. The GitHub Pages project is configured to publish this repository’s `main` branch root with `tgpu.my` as its custom domain. Verify the Worker version and the public apex before attributing production to this repository.
+
+The three homepage files are static and share `assets/legacy-corporate.css`. The crest and matching favicon are the original Legacy assets in commit `52aaa1c`. The photographs are the same WebP data previously served from the repository’s `assets/legacy/image-data/` chunks. The current classes, Academy, learning and support content retain their routes. Old homepage class links such as `/#register` and `/ar.html#pricing` forward to the same-language class page.
+
+No build step is needed. Run `python3 .github/scripts/verify-legacy-home.py` and `node --check assets/legacy-corporate.js` from the repository root. For a local preview, start `python3 -m http.server 8080` and open `http://localhost:8080/`.
+
 
 ## Naturals reference redesign — September 2026
 
