@@ -497,3 +497,12 @@ html[dir='rtl'] .corporate-hero h1 {
   height: 15px;
   flex: none;
 }
+
+/* Clear, accessible cross-navigation between the three distinct TGPU destinations. */
+.corporate-family { background: #f4efe4; color: #234438; }
+.corporate-family > .wrap > p { max-width: 66ch; }
+.corporate-family .corporate-cards { grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); margin-block-start: 25px; }
+.corporate-family article { background: #fffdf8; border: 1px solid #d5c5a2; border-block-start: 4px solid #a8894b; border-radius: 12px; padding: clamp(20px, 3vw, 32px); display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.corporate-family article h3 { margin: 0; }
+.corporate-family article p { margin: 0 0 8px; }
+.corporate-family article a { margin-block-start: auto; }
