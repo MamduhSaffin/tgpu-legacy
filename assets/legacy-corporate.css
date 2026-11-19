@@ -491,3 +491,9 @@ html[dir='rtl'] .corporate-hero h1 {
     to { opacity: 1; transform: translateY(0); }
   }
 }
+
+.outbound-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
