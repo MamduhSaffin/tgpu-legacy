@@ -37,7 +37,7 @@
     ['Feature Your Class with TGPU','Borang kolaborasi untuk kelas Quran, Tajwid, Iqra, Hafazan, Arabic atau pendidikan Islam.','../academy/collaboration.html','Collaboration','collaboration kolaborasi feature class kelas quran tajwid iqra hafazan arabic islamic teacher academy'],
     ['Kelas TGPU','Maklumat kelas, yuran dan pendaftaran TGPU.','../classes.html','Classes','kelas class tuition yuran fee pricing registration daftar quran tajwid online'],
     ['Support TGPU','Sokongan kepada misi TGPU dan Surau Tok Guru Pulau Ubi serta borang cadangan.','../support/','Support','support sokong donation sumbangan duitnow qr maybank surau tok guru pulau ubi suggestion cadangan'],
-    ['TGPU Naturals','Inisiatif produk kesejahteraan semula jadi keluarga TGPU.','../wellness/','Wellness','tgpu naturals wellness natural family product produk kunyit moringa tongkat ali sacha inchi'],
+    ['TGPU Naturals','Inisiatif kesejahteraan keluarga dalam pembangunan, dengan tumpuan pada pendidikan tentang bahan tradisional dan semula jadi.','../#naturals','Legacy','tgpu naturals natural family warisan kesejahteraan kunyit tongkat ali sacha inchi'],
     ['TGPU Gulf Advisory & Trade','Malaysia ↔ Saudi/GCC market entry, sourcing, trade facilitation dan business development.','../gulf/','Gulf','gulf gcc saudi uae middle east malaysia market entry trade advisory sourcing business tgpu gulf'],
     ['Sarong Music Run 2026 · Living Heritage','Refleksi tentang Sarong Music Run 2026 dan warisan hidup Malaysia.','../academy/learning-hub/sarong-music-run-2026-living-heritage.html','Learning Hub','sarong music run 2026 heritage warisan malaysia budaya family event']
   ].map(([title,description,url,category,keywords]) => ({title,description,url,category,keywords}));
