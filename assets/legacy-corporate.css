@@ -506,3 +506,44 @@ html[dir='rtl'] .corporate-hero h1 {
 .corporate-family article h3 { margin: 0; }
 .corporate-family article p { margin: 0 0 8px; }
 .corporate-family article a { margin-block-start: auto; }
+
+
+/* TGPU family showcase — cinematic, responsive and reduced-motion safe. */
+.corporate-family-premium {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #f8f5e9;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(22,112,78,.42), transparent 54%),
+    radial-gradient(ellipse at 100% 100%, rgba(184,145,67,.12), transparent 42%),
+    linear-gradient(145deg,#031a14 0%,#062c21 52%,#031811 100%);
+}
+.corporate-family-premium::before {
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background-image:linear-gradient(rgba(209,178,105,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(209,178,105,.055) 1px,transparent 1px);
+  background-size:58px 58px; mask-image:linear-gradient(to bottom,transparent,#000 22%,#000 78%,transparent);
+}
+.corporate-family-premium .eyebrow { color:#e4c77f; letter-spacing:.2em; font-weight:800; }
+.corporate-family-premium h2 { max-width:18ch; color:#fff8e7; font-size:clamp(2.2rem,4.7vw,4.4rem); }
+.corporate-family-premium .family-intro { max-width:64ch; color:#d9e4dc; font-size:clamp(1rem,1.4vw,1.18rem); }
+.family-orbit { position:absolute; top:8%; right:4%; width:min(24vw,270px); aspect-ratio:1; border:1px solid rgba(219,184,104,.22); border-radius:50%; pointer-events:none; }
+.family-orbit::before,.family-orbit::after { content:""; position:absolute; inset:15%; border:1px solid rgba(219,184,104,.2); border-radius:50%; transform:rotate(58deg) scaleX(.45); }
+.family-orbit::after { transform:rotate(-58deg) scaleX(.45); }
+.family-orbit span { position:absolute; width:7px; height:7px; border-radius:50%; background:#f1d18a; box-shadow:0 0 16px #eac66f; }
+.family-orbit span:nth-child(1){top:10%;left:25%}.family-orbit span:nth-child(2){right:3%;top:55%}.family-orbit span:nth-child(3){bottom:9%;left:35%}
+.family-portfolios { position:relative; z-index:1; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-block-start:34px; }
+.family-portfolios article { min-width:0; min-height:245px; display:flex; flex-direction:column; align-items:flex-start; gap:13px; padding:clamp(18px,2.2vw,28px); border:1px solid rgba(215,183,112,.42); border-radius:15px; background:linear-gradient(155deg,rgba(255,255,255,.085),rgba(255,255,255,.025)); box-shadow:0 18px 48px rgba(0,0,0,.18); backdrop-filter:blur(8px); transition:transform .25s ease,border-color .25s ease,background .25s ease; }
+.family-portfolios article:hover { transform:translateY(-5px); border-color:#e4c77f; background:linear-gradient(155deg,rgba(255,255,255,.13),rgba(255,255,255,.04)); }
+.family-portfolios h3 { color:#fff5dc; font-size:clamp(1.15rem,1.6vw,1.55rem); line-height:1.2; margin:0; }
+.family-portfolios p { color:#d5e1d9; line-height:1.55; margin:0; }
+.family-index { color:#e5c77e; font:800 .7rem/1.4 var(--sans); letter-spacing:.15em; }
+.family-portfolios a { margin-block-start:auto; color:#f0d58f; font-weight:800; text-decoration:underline; text-decoration-color:rgba(240,213,143,.6); text-underline-offset:5px; }
+.family-portfolios a:hover { color:#fff4cf; }
+.family-status { margin-block-start:auto; color:#f0d58f; font-size:.88rem; font-weight:700; }
+.family-portfolios .family-hub { border-color:#d9b768; background:linear-gradient(145deg,rgba(188,145,58,.2),rgba(255,255,255,.045)); }
+.family-note { margin-block:22px 0; color:#b9c9bf; font-size:.86rem; line-height:1.6; max-width:80ch; }
+@media(max-width:1000px){.family-portfolios{grid-template-columns:repeat(2,minmax(0,1fr))}.family-orbit{width:190px;opacity:.6}}
+@media(max-width:600px){.family-portfolios{grid-template-columns:1fr}.family-portfolios article{min-height:0}.family-orbit{top:5%;right:-35px;width:150px;opacity:.35}.corporate-family-premium h2{max-width:14ch}}
+@media(prefers-reduced-motion:reduce){.family-portfolios article{transition:none}.family-portfolios article:hover{transform:none}}
+html[dir="rtl"] .family-index{letter-spacing:normal}
