@@ -547,3 +547,36 @@ html[dir='rtl'] .corporate-hero h1 {
 @media(max-width:600px){.family-portfolios{grid-template-columns:1fr}.family-portfolios article{min-height:0}.family-orbit{top:5%;right:-35px;width:150px;opacity:.35}.corporate-family-premium h2{max-width:14ch}}
 @media(prefers-reduced-motion:reduce){.family-portfolios article{transition:none}.family-portfolios article:hover{transform:none}}
 html[dir="rtl"] .family-index{letter-spacing:normal}
+
+
+/* Full-family 16:9 homepage hero artwork. The image itself contains the
+   approved four-portfolio composition; preserve the entire artwork. */
+.corporate-hero-banner {
+  padding:0;
+  background:#031a14;
+  overflow:hidden;
+}
+.corporate-hero-banner::before { display:none; }
+.corporate-hero-banner-frame {
+  width:100%;
+  max-width:1920px;
+  margin-inline:auto;
+  background:#031a14;
+  line-height:0;
+}
+.corporate-hero-banner-frame img {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:contain;
+  object-position:center;
+}
+@media(max-width:640px) {
+  .corporate-hero-banner-frame img {
+    width:100%;
+    height:auto;
+    aspect-ratio:16/9;
+    object-fit:contain;
+  }
+}
