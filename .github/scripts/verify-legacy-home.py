@@ -25,11 +25,10 @@ logo = "assets/tgpu-logo.png"
 favicon = "assets/tgpu-legacy-favicon.png"
 site = "https://tgpu.my/"
 required_ids = {
-    "main", "home", "legacy", "about", "mission", "vision", "classes", "programs",
-    "community", "explore-tgpu", "tgpu-ecosystem", "naturals", "digital-ecosystem",
-    "gulf-advisory", "leadership", "tgpu-support-invite", "contact",
+    "main", "home", "legacy", "explore-tgpu", "tgpu-family", "digital-ecosystem",
+    "gulf-advisory", "gcc-market-entry", "contact",
 }
-apps = {f"https://{app}.tgpu.my/" for app in ("iqra", "teman", "academy", "learning", "satu", "khalifah")}
+destinations = {"https://tgpu.tech/", "https://tgpugulf.com/", "https://gccmarketentry.me/"}
 
 for home, language, suffix in (("index.html", "ms", ""), ("en.html", "en", "-en"), ("ar.html", "ar", "-ar")):
     file = Path(home)
@@ -41,7 +40,10 @@ for home, language, suffix in (("index.html", "ms", ""), ("en.html", "en", "-en"
     ids = page.ids()
     assert all(count == 1 for count in ids.values()), (home, ids)
     assert required_ids <= ids.keys(), (home, required_ids - ids.keys())
-    assert "<title>TGPU Legacy" in file.read_text(encoding="utf-8"), home
+    content = file.read_text(encoding="utf-8")
+    assert "<title>TGPU Legacy" in content and "Tok Guru Pulau Ubi Legacy" in content, home
+    assert "TGPU Innovator Labs" in content, home
+    assert not any(term in content.casefold() for term in ("naturals", "wellness")), home
 
     metadata = {
         attrs.get("name", attrs.get("property")): attrs.get("content")
@@ -57,9 +59,9 @@ for home, language, suffix in (("index.html", "ms", ""), ("en.html", "en", "-en"
     assert any(attrs["src"] == logo for attrs in page.attributes("img")), home
 
     anchors = {attrs["href"] for attrs in page.attributes("a") if "href" in attrs}
-    assert apps <= anchors, (home, apps - anchors)
-    assert {"https://tgpu.tech/", "https://tgpugulf.com/", "https://founder.tgpu.my/", "search/", "support/"} <= anchors, home
-    assert {f"classes{suffix}.html", f"learn{suffix}.html#legacy", "https://wellness.tgpu.my/"} <= anchors, home
+    assert destinations <= anchors, (home, destinations - anchors)
+    assert {"https://founder.tgpu.my/", f"classes{suffix}.html", f"classes{suffix}.html#ssm"} <= anchors, home
+    assert any(href.startswith("mailto:mamduh@tgpu.my?") for href in anchors), home
     for href in anchors:
         url = urlsplit(href)
         if url.scheme:
@@ -74,7 +76,7 @@ for home, language, suffix in (("index.html", "ms", ""), ("en.html", "en", "-en"
     for attrs in page.attributes("a"):
         if attrs.get("target") == "_blank":
             assert "noopener" in attrs.get("rel", "").split(), (home, attrs)
-    print(f"PASS {home}: corporate identity, locale, page sections, branding and legacy routes")
+    print(f"PASS {home}: corporate identity, locale, portfolio destinations, branding and class links")
 
 for image in (logo, favicon):
     data = Path(image).read_bytes()
